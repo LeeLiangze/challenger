@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Intervention\Image\ImageServiceProvider;
 use Larapack\DoctrineSupport\DoctrineSupportServiceProvider;
-use Larapack\ChallengerHooks\VoyagerHooksServiceProvider;
+use CHG\ChallengerHooks\VoyagerHooksServiceProvider;
 use CHG\Voyager\Events\FormFieldsRegistered;
 use CHG\Voyager\Facades\Voyager as VoyagerFacade;
 use CHG\Voyager\FormFields\After\DescriptionHandler;
