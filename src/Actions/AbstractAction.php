@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\Actions;
+namespace CHG\Voyager\Actions;
 
 abstract class AbstractAction implements ActionInterface
 {

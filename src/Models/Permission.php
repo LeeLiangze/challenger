@@ -1,10 +1,10 @@
 <?php
 
-namespace TCG\Voyager\Models;
+namespace CHG\Voyager\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Traits\HasRelationships;
+use CHG\Voyager\Facades\Voyager;
+use CHG\Voyager\Traits\HasRelationships;
 
 class Permission extends Model
 {

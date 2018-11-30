@@ -1,25 +1,25 @@
 <?php
 
-namespace TCG\Voyager\Tests;
+namespace CHG\Voyager\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use TCG\Voyager\Events\BreadAdded;
-use TCG\Voyager\Events\BreadDataAdded;
-use TCG\Voyager\Events\BreadDataDeleted;
-use TCG\Voyager\Events\BreadDataUpdated;
-use TCG\Voyager\Events\BreadDeleted;
-use TCG\Voyager\Events\BreadImagesDeleted;
-use TCG\Voyager\Events\BreadUpdated;
-use TCG\Voyager\Events\FileDeleted;
-use TCG\Voyager\Events\TableAdded;
-use TCG\Voyager\Events\TableDeleted;
-use TCG\Voyager\Events\TableUpdated;
-use TCG\Voyager\Models\DataType;
-use TCG\Voyager\Models\Page;
+use CHG\Voyager\Events\BreadAdded;
+use CHG\Voyager\Events\BreadDataAdded;
+use CHG\Voyager\Events\BreadDataDeleted;
+use CHG\Voyager\Events\BreadDataUpdated;
+use CHG\Voyager\Events\BreadDeleted;
+use CHG\Voyager\Events\BreadImagesDeleted;
+use CHG\Voyager\Events\BreadUpdated;
+use CHG\Voyager\Events\FileDeleted;
+use CHG\Voyager\Events\TableAdded;
+use CHG\Voyager\Events\TableDeleted;
+use CHG\Voyager\Events\TableUpdated;
+use CHG\Voyager\Models\DataType;
+use CHG\Voyager\Models\Page;
 
 class EventTest extends TestCase
 {

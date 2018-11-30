@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\Http\Controllers\ContentTypes;
+namespace CHG\Voyager\Http\Controllers\ContentTypes;
 
 use Carbon\Carbon;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace TCG\Voyager\Models;
+namespace CHG\Voyager\Models;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use TCG\Voyager\Contracts\User as UserContract;
-use TCG\Voyager\Traits\HasRelationships;
-use TCG\Voyager\Traits\VoyagerUser;
+use CHG\Voyager\Contracts\User as UserContract;
+use CHG\Voyager\Traits\HasRelationships;
+use CHG\Voyager\Traits\VoyagerUser;
 
 class User extends Authenticatable implements UserContract
 {

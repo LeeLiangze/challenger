@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\Http\Controllers;
+namespace CHG\Voyager\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -8,18 +8,18 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Storage;
-use TCG\Voyager\Events\FileDeleted;
-use TCG\Voyager\Http\Controllers\ContentTypes\Checkbox;
-use TCG\Voyager\Http\Controllers\ContentTypes\Coordinates;
-use TCG\Voyager\Http\Controllers\ContentTypes\File;
-use TCG\Voyager\Http\Controllers\ContentTypes\Image as ContentImage;
-use TCG\Voyager\Http\Controllers\ContentTypes\MultipleImage;
-use TCG\Voyager\Http\Controllers\ContentTypes\Password;
-use TCG\Voyager\Http\Controllers\ContentTypes\Relationship;
-use TCG\Voyager\Http\Controllers\ContentTypes\SelectMultiple;
-use TCG\Voyager\Http\Controllers\ContentTypes\Text;
-use TCG\Voyager\Http\Controllers\ContentTypes\Timestamp;
-use TCG\Voyager\Traits\AlertsMessages;
+use CHG\Voyager\Events\FileDeleted;
+use CHG\Voyager\Http\Controllers\ContentTypes\Checkbox;
+use CHG\Voyager\Http\Controllers\ContentTypes\Coordinates;
+use CHG\Voyager\Http\Controllers\ContentTypes\File;
+use CHG\Voyager\Http\Controllers\ContentTypes\Image as ContentImage;
+use CHG\Voyager\Http\Controllers\ContentTypes\MultipleImage;
+use CHG\Voyager\Http\Controllers\ContentTypes\Password;
+use CHG\Voyager\Http\Controllers\ContentTypes\Relationship;
+use CHG\Voyager\Http\Controllers\ContentTypes\SelectMultiple;
+use CHG\Voyager\Http\Controllers\ContentTypes\Text;
+use CHG\Voyager\Http\Controllers\ContentTypes\Timestamp;
+use CHG\Voyager\Traits\AlertsMessages;
 use Validator;
 
 abstract class Controller extends BaseController

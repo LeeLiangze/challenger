@@ -9,7 +9,7 @@ Voyager will generate thumbnails for Image field type when you specify the [addi
 After you have your thumbnails generated, you may want to display the thumbnails in your view or get the thumbnail URL. In order to do that you need to add `Resizable` traits to your model.
 
 ```php
-use TCG\Voyager\Traits\Resizable;
+use CHG\Voyager\Traits\Resizable;
 
 class Post extends Model
 {

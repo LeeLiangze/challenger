@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use TCG\Voyager\Models\Category;
-use TCG\Voyager\Models\DataRow;
-use TCG\Voyager\Models\DataType;
-use TCG\Voyager\Models\Menu;
-use TCG\Voyager\Models\MenuItem;
-use TCG\Voyager\Models\Permission;
+use CHG\Voyager\Models\Category;
+use CHG\Voyager\Models\DataRow;
+use CHG\Voyager\Models\DataType;
+use CHG\Voyager\Models\Menu;
+use CHG\Voyager\Models\MenuItem;
+use CHG\Voyager\Models\Permission;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -25,7 +25,7 @@ class CategoriesTableSeeder extends Seeder
                 'display_name_singular' => __('voyager::seeders.data_types.category.singular'),
                 'display_name_plural'   => __('voyager::seeders.data_types.category.plural'),
                 'icon'                  => 'voyager-categories',
-                'model_name'            => 'TCG\\Voyager\\Models\\Category',
+                'model_name'            => 'CHG\\Voyager\\Models\\Category',
                 'controller'            => '',
                 'generate_permissions'  => 1,
                 'description'           => '',

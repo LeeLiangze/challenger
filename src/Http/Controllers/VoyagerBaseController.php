@@ -1,16 +1,16 @@
 <?php
 
-namespace TCG\Voyager\Http\Controllers;
+namespace CHG\Voyager\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use TCG\Voyager\Database\Schema\SchemaManager;
-use TCG\Voyager\Events\BreadDataAdded;
-use TCG\Voyager\Events\BreadDataDeleted;
-use TCG\Voyager\Events\BreadDataUpdated;
-use TCG\Voyager\Events\BreadImagesDeleted;
-use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
+use CHG\Voyager\Database\Schema\SchemaManager;
+use CHG\Voyager\Events\BreadDataAdded;
+use CHG\Voyager\Events\BreadDataDeleted;
+use CHG\Voyager\Events\BreadDataUpdated;
+use CHG\Voyager\Events\BreadImagesDeleted;
+use CHG\Voyager\Facades\Voyager;
+use CHG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 
 class VoyagerBaseController extends Controller
 {

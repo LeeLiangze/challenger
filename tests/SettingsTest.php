@@ -1,9 +1,9 @@
 <?php
 
-namespace TCG\Voyager\Tests;
+namespace CHG\Voyager\Tests;
 
 use Illuminate\Support\Facades\Auth;
-use TCG\Voyager\Models\Setting;
+use CHG\Voyager\Models\Setting;
 
 class SettingsTest extends TestCase
 {

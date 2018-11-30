@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager;
+namespace CHG\Voyager;
 
 use Arrilot\Widgets\Facade as Widget;
 use Illuminate\Database\Eloquent\Collection;
@@ -9,25 +9,25 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use TCG\Voyager\Actions\DeleteAction;
-use TCG\Voyager\Actions\EditAction;
-use TCG\Voyager\Actions\ViewAction;
-use TCG\Voyager\Events\AlertsCollection;
-use TCG\Voyager\FormFields\After\HandlerInterface as AfterHandlerInterface;
-use TCG\Voyager\FormFields\HandlerInterface;
-use TCG\Voyager\Models\Category;
-use TCG\Voyager\Models\DataRow;
-use TCG\Voyager\Models\DataType;
-use TCG\Voyager\Models\Menu;
-use TCG\Voyager\Models\MenuItem;
-use TCG\Voyager\Models\Page;
-use TCG\Voyager\Models\Permission;
-use TCG\Voyager\Models\Post;
-use TCG\Voyager\Models\Role;
-use TCG\Voyager\Models\Setting;
-use TCG\Voyager\Models\Translation;
-use TCG\Voyager\Models\User;
-use TCG\Voyager\Traits\Translatable;
+use CHG\Voyager\Actions\DeleteAction;
+use CHG\Voyager\Actions\EditAction;
+use CHG\Voyager\Actions\ViewAction;
+use CHG\Voyager\Events\AlertsCollection;
+use CHG\Voyager\FormFields\After\HandlerInterface as AfterHandlerInterface;
+use CHG\Voyager\FormFields\HandlerInterface;
+use CHG\Voyager\Models\Category;
+use CHG\Voyager\Models\DataRow;
+use CHG\Voyager\Models\DataType;
+use CHG\Voyager\Models\Menu;
+use CHG\Voyager\Models\MenuItem;
+use CHG\Voyager\Models\Page;
+use CHG\Voyager\Models\Permission;
+use CHG\Voyager\Models\Post;
+use CHG\Voyager\Models\Role;
+use CHG\Voyager\Models\Setting;
+use CHG\Voyager\Models\Translation;
+use CHG\Voyager\Models\User;
+use CHG\Voyager\Traits\Translatable;
 
 class Voyager
 {
@@ -313,7 +313,7 @@ class Voyager
 
             // Loop through all the packages and get the version of voyager
             foreach ($file->packages as $package) {
-                if ($package->name == 'tcg/voyager') {
+                if ($package->name == 'CHG/voyager') {
                     $this->version = $package->version;
                     break;
                 }

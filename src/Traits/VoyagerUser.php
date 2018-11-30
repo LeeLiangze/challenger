@@ -1,10 +1,10 @@
 <?php
 
-namespace TCG\Voyager\Traits;
+namespace CHG\Voyager\Traits;
 
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
-use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Models\Role;
+use CHG\Voyager\Facades\Voyager;
+use CHG\Voyager\Models\Role;
 
 /**
  * @property  \Illuminate\Database\Eloquent\Collection  roles

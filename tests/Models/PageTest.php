@@ -1,9 +1,9 @@
 <?php
 
-namespace TCG\Voyager\Tests;
+namespace CHG\Voyager\Tests;
 
 use Illuminate\Support\Facades\Auth;
-use TCG\Voyager\Models\Page;
+use CHG\Voyager\Models\Page;
 
 class PageTest extends TestCase
 {

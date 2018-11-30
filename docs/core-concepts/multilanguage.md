@@ -21,7 +21,7 @@ First you need to define some `locales` in your `config/voyager.php` file and `e
 After that you need to include the `Translatable` Trait in your model and define the translatable attributes:
 
 ```php
-use TCG\Voyager\Traits\Translatable;
+use CHG\Voyager\Traits\Translatable;
 class Post extends Model
 {
     use Translatable;

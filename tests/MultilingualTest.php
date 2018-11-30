@@ -1,13 +1,13 @@
 <?php
 
-namespace TCG\Voyager\Tests;
+namespace CHG\Voyager\Tests;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Traits\Translatable;
-use TCG\Voyager\Translator;
-use TCG\Voyager\Translator\Collection;
+use CHG\Voyager\Facades\Voyager;
+use CHG\Voyager\Traits\Translatable;
+use CHG\Voyager\Translator;
+use CHG\Voyager\Translator\Collection;
 
 class MultilingualTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\Providers;
+namespace CHG\Voyager\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
@@ -13,9 +13,9 @@ class VoyagerEventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'TCG\Voyager\Events\BreadAdded' => [
-            'TCG\Voyager\Listeners\AddBreadMenuItem',
-            'TCG\Voyager\Listeners\AddBreadPermission',
+        'CHG\Voyager\Events\BreadAdded' => [
+            'CHG\Voyager\Listeners\AddBreadMenuItem',
+            'CHG\Voyager\Listeners\AddBreadPermission',
         ],
     ];
 

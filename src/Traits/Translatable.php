@@ -1,12 +1,12 @@
 <?php
 
-namespace TCG\Voyager\Traits;
+namespace CHG\Voyager\Traits;
 
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Translator;
+use CHG\Voyager\Facades\Voyager;
+use CHG\Voyager\Translator;
 
 trait Translatable
 {

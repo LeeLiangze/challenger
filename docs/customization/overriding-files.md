@@ -20,7 +20,7 @@ You can override the controller for a single BREAD by creating a controller whic
 
 namespace App\Http\Controllers;
 
-class VoyagerCategoriesController extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
+class VoyagerCategoriesController extends \CHG\Voyager\Http\Controllers\VoyagerBaseController
 {
     //...
 }
@@ -71,7 +71,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Events\Dispatcher;
-use TCG\Voyager\Facades\Voyager;
+use CHG\Voyager\Facades\Voyager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -90,7 +90,7 @@ The next step is to create your model and make it extend the original model. In 
 
 namespace App;
 
-class DataRow extends \TCG\Voyager\Models\DataRow
+class DataRow extends \CHG\Voyager\Models\DataRow
 {
     // ...
 }

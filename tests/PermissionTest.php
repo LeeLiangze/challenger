@@ -1,11 +1,11 @@
 <?php
 
-namespace TCG\Voyager\Tests;
+namespace CHG\Voyager\Tests;
 
 use Illuminate\Support\Facades\Auth;
-use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Models\Permission;
-use TCG\Voyager\Models\Role;
+use CHG\Voyager\Facades\Voyager;
+use CHG\Voyager\Models\Permission;
+use CHG\Voyager\Models\Role;
 
 class PermissionTest extends TestCase
 {

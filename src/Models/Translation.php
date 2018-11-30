@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\Models;
+namespace CHG\Voyager\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

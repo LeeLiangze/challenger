@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\Tests\Stubs\Widgets;
+namespace CHG\Voyager\Tests\Stubs\Widgets;
 
 use Arrilot\Widgets\AbstractWidget;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace TCG\Voyager;
+namespace CHG\Voyager;
 
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Model;
-use TCG\Voyager\Facades\Voyager as VoyagerFacade;
+use CHG\Voyager\Facades\Voyager as VoyagerFacade;
 
 class Translator implements ArrayAccess
 {
@@ -302,7 +302,7 @@ class Translator implements ArrayAccess
     public function __call($method, array $arguments)
     {
         if (!$this->model->hasTranslatorMethod($method)) {
-            throw new \Exception('Call to undefined method TCG\Voyager\Translator::'.$method.'()');
+            throw new \Exception('Call to undefined method CHG\Voyager\Translator::'.$method.'()');
         }
 
         return call_user_func_array([$this, 'runTranslatorMethod'], [$method, $arguments]);

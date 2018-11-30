@@ -3,7 +3,7 @@
 Voyager is super easy to install. After creating your new Laravel application you can include the Voyager package with the following command:
 
 ```bash
-composer require tcg/voyager
+composer require CHGvoyager
 ```
 
 Next make sure to create a new database and add your database credentials to your .env file, you will also want to add your application URL in the `APP_URL` variable:
@@ -86,7 +86,7 @@ php artisan vendor:publish --provider=ImageServiceProviderLaravel5
 If you are on Laravel 5.5+ you can skip this step.
 {% endhint %}
 
-To add the Voyager Service Provider open up your application `config/app.php` file and add `TCG\Voyager\VoyagerServiceProvider::class,` in the `providers` array like so:
+To add the Voyager Service Provider open up your application `config/app.php` file and add `CHG\Voyager\VoyagerServiceProvider::class,` in the `providers` array like so:
 
 ```php
 <?php
@@ -96,7 +96,7 @@ To add the Voyager Service Provider open up your application `config/app.php` fi
     //...
 
     // Package Service Providers
-    TCG\Voyager\VoyagerServiceProvider::class,
+    CHG\Voyager\VoyagerServiceProvider::class,
     // ...
 
     // Application Service Providers

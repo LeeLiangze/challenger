@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\Facades;
+namespace CHG\Voyager\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

@@ -6,7 +6,7 @@
 
 To update to the latest version inside of your composer.json file make sure to update the version of voyager inside the require declaration inside of your composer.json to:
 
-`"tcg/voyager": "1.1.*"`
+`"chg/voyager": "1.1.*"`
 
 And then run `composer update`
 
@@ -65,7 +65,7 @@ Then make sure the other fields are like below:
 | edit | 1 |
 | add | 1 |
 | delete | 0 |
-| details | `{"model":"TCG\\Voyager\\Models\\Role","table":"roles","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"user_roles","pivot":"1"}` |
+| details | `{"model":"CHG\\Voyager\\Models\\Role","table":"roles","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"user_roles","pivot":"1"}` |
 | order | 11 |
 
 ### Bread

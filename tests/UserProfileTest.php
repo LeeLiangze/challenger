@@ -1,13 +1,13 @@
 <?php
 
-namespace TCG\Voyager\Tests;
+namespace CHG\Voyager\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use TCG\Voyager\Models\Role;
-use TCG\Voyager\Models\User;
+use CHG\Voyager\Models\Role;
+use CHG\Voyager\Models\User;
 
 class UserProfileTest extends TestCase
 {
@@ -101,13 +101,13 @@ class UserProfileTest extends TestCase
 
     public function testCanEditUserEmailWithEditorPermissions()
     {
-        $user = factory(\TCG\Voyager\Models\User::class)->create();
+        $user = factory(\CHG\Voyager\Models\User::class)->create();
         $editPageForTheCurrentUser = route('voyager.users.edit', ['user' => $user->id]);
         $roleId = $user->role_id;
         $role = Role::find($roleId);
         // add permissions which reflect a possible editor role
         // without permissions to edit  users
-        $role->permissions()->attach(\TCG\Voyager\Models\Permission::whereIn('key', [
+        $role->permissions()->attach(\CHG\Voyager\Models\Permission::whereIn('key', [
             'browse_admin',
             'browse_users',
         ])->get()->pluck('id')->all());

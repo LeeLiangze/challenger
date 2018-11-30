@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use TCG\Voyager\Models\Role;
-use TCG\Voyager\Models\User;
+use CHG\Voyager\Models\Role;
+use CHG\Voyager\Models\User;
 
 class UsersTableSeeder extends Seeder
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\FormFields;
+namespace CHG\Voyager\FormFields;
 
 class CheckboxHandler extends AbstractHandler
 {

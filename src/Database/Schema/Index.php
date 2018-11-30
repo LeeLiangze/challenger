@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\Database\Schema;
+namespace CHG\Voyager\Database\Schema;
 
 use Doctrine\DBAL\Schema\Index as DoctrineIndex;
 

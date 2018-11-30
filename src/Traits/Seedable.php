@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\Traits;
+namespace CHG\Voyager\Traits;
 
 trait Seedable
 {

@@ -1,22 +1,22 @@
 <?php
 
-namespace TCG\Voyager\Http\Controllers;
+namespace CHG\Voyager\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use TCG\Voyager\Database\Schema\Column;
-use TCG\Voyager\Database\Schema\SchemaManager;
-use TCG\Voyager\Database\Schema\Table;
-use TCG\Voyager\Database\Types\Type;
-use TCG\Voyager\Events\BreadAdded;
-use TCG\Voyager\Events\BreadDeleted;
-use TCG\Voyager\Events\BreadUpdated;
-use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Models\DataRow;
-use TCG\Voyager\Models\DataType;
-use TCG\Voyager\Models\Permission;
+use CHG\Voyager\Database\Schema\Column;
+use CHG\Voyager\Database\Schema\SchemaManager;
+use CHG\Voyager\Database\Schema\Table;
+use CHG\Voyager\Database\Types\Type;
+use CHG\Voyager\Events\BreadAdded;
+use CHG\Voyager\Events\BreadDeleted;
+use CHG\Voyager\Events\BreadUpdated;
+use CHG\Voyager\Facades\Voyager;
+use CHG\Voyager\Models\DataRow;
+use CHG\Voyager\Models\DataType;
+use CHG\Voyager\Models\Permission;
 
 class VoyagerBreadController extends Controller
 {
@@ -144,7 +144,7 @@ class VoyagerBreadController extends Controller
     {
         Voyager::canOrFail('browse_bread');
 
-        /* @var \TCG\Voyager\Models\DataType $dataType */
+        /* @var \CHG\Voyager\Models\DataType $dataType */
         try {
             $dataType = Voyager::model('DataType')->find($id);
 
@@ -181,7 +181,7 @@ class VoyagerBreadController extends Controller
     {
         Voyager::canOrFail('browse_bread');
 
-        /* @var \TCG\Voyager\Models\DataType $dataType */
+        /* @var \CHG\Voyager\Models\DataType $dataType */
         $dataType = Voyager::model('DataType')->find($id);
 
         // Delete Translations, if present
