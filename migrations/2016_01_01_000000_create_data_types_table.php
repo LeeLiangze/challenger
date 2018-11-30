@@ -13,7 +13,7 @@ class CreateDataTypesTable extends Migration
     public function up()
     {
         // Create table for storing roles
-        Schema::create('data_types', function (Blueprint $table) {
+        Schema::create('crm_cms_data_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('slug')->unique();
@@ -27,7 +27,7 @@ class CreateDataTypesTable extends Migration
         });
 
         // Create table for storing roles
-        Schema::create('data_rows', function (Blueprint $table) {
+        Schema::create('crm_cms_data_rows', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('data_type_id')->unsigned();
             $table->string('field');
@@ -53,7 +53,7 @@ class CreateDataTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('data_rows');
-        Schema::drop('data_types');
+        Schema::drop('crm_cms_data_rows');
+        Schema::drop('crm_cms_data_types');
     }
 }

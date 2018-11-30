@@ -10,6 +10,8 @@ class Permission extends Model
 {
     use HasRelationships;
 
+    protected $table = 'crm_cms_permissions';
+
     protected $guarded = [];
 
     public function roles()

@@ -13,7 +13,7 @@ class CreateTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('translations', function (Blueprint $table) {
+        Schema::create('crm_cms_translations', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('table_name');
@@ -36,6 +36,6 @@ class CreateTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('translations');
+        Schema::dropIfExists('crm_cms_translations');
     }
 }

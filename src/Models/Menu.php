@@ -12,7 +12,7 @@ use TCG\Voyager\Facades\Voyager;
  */
 class Menu extends Model
 {
-    protected $table = 'menus';
+    protected $table = 'crm_cms_menus';
 
     protected $guarded = [];
 

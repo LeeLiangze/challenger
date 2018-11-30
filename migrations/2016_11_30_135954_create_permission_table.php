@@ -13,7 +13,7 @@ class CreatePermissionTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create('crm_cms_permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('key')->index();
             $table->string('table_name');
@@ -28,6 +28,6 @@ class CreatePermissionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('crm_cms_permissions');
     }
 }

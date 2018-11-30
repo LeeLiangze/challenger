@@ -13,6 +13,8 @@ class User extends Authenticatable implements UserContract
     use VoyagerUser,
         HasRelationships;
 
+    protected $table = 'crm_cms_users';
+
     protected $guarded = [];
 
     protected $casts = [
