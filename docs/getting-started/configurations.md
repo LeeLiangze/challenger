@@ -64,7 +64,7 @@ You can specify the namespace or location of your models. This is used when crea
 ```php
 <?php
 
-'assets_path' => '/vendor/CHGvoyager/assets',
+'assets_path' => '/vendor/chg/voyager/assets',
 ```
 
 You may wish to specify a different asset path. If your site lives in a subfolder you may need to include that directory to the beginning of the path. This may also be used in case you wish to duplicate the published assets and customize your own.

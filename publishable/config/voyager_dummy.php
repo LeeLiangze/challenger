@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'assets_path' => '/vendor/CHGvoyager/assets',
+    'assets_path' => '/vendor/chg/voyager/assets',
 
     /*
     |--------------------------------------------------------------------------

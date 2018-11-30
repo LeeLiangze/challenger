@@ -62,7 +62,7 @@
             position: fixed;
             top: 61px;
             left: 0px;
-            background-image: url(/vendor/CHGvoyager/assets/images/bg.jpg);
+            background-image: url(/vendor/chg/voyager/assets/images/bg.jpg);
             background-size: cover;
             background-position: 0px;
             width: 100%;
