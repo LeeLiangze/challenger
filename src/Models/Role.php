@@ -18,7 +18,7 @@ class Role extends Model
     {
         $userModel = Voyager::modelClass('User');
 
-        return $this->belongsToMany($userModel, 'user_roles')
+        return $this->belongsToMany($userModel, 'crm_cms_user_roles')
                     ->select(app($userModel)->getTable().'.*')
                     ->union($this->hasMany($userModel))->getQuery();
     }

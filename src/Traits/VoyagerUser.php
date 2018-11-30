@@ -24,7 +24,7 @@ trait VoyagerUser
      */
     public function roles()
     {
-        return $this->belongsToMany(Voyager::modelClass('Role'), 'user_roles');
+        return $this->belongsToMany(Voyager::modelClass('Role'), 'crm_cms_user_roles');
     }
 
     /**

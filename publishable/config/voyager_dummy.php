@@ -92,7 +92,7 @@ return [
 
     'database' => [
         'tables' => [
-            'hidden' => ['migrations', 'data_rows', 'data_types', 'menu_items', 'password_resets', 'permission_role', 'settings'],
+            'hidden' => ['crm_cms_data_rows', 'crm_cms_data_types', 'crm_cms_menu_items', 'crm_cms_permission_role', 'crm_cms_settings'],
         ],
     ],
 
