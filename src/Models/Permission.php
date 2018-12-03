@@ -16,7 +16,7 @@ class Permission extends Model
 
     public function roles()
     {
-        return $this->belongsToMany(Voyager::modelClass('Role'));
+        return $this->belongsToMany(Voyager::modelClass('Role'),'crm_cms_permission_role');
     }
 
     public static function generateFor($table_name)
