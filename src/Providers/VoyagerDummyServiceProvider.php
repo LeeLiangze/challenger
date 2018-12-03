@@ -32,9 +32,6 @@ class VoyagerDummyServiceProvider extends ServiceProvider
             'dummy_seeds' => [
                 "{$publishablePath}/database/dummy_seeds/" => database_path('seeds'),
             ],
-            'dummy_content' => [
-                "{$publishablePath}/dummy_content/" => storage_path('app/public'),
-            ],
             'dummy_config' => [
                 "{$publishablePath}/config/voyager_dummy.php" => config_path('voyager.php'),
             ],
