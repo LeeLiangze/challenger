@@ -15,9 +15,9 @@ class CreateUserRolesTable extends Migration
     {
         Schema::create('crm_cms_user_roles', function (Blueprint $table) {
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('crm_cms_users')->onDelete('cascade');
             $table->integer('role_id')->unsigned()->index();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('crm_cms_roles')->onDelete('cascade');
             $table->primary(['user_id', 'role_id']);
         });
     }

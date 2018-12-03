@@ -15,7 +15,7 @@ class AddUserRoleRelationship extends Migration
     {
         Schema::table('crm_cms_users', function (Blueprint $table) {
             $table->unsignedInteger('role_id')->change();
-            $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('role_id')->references('id')->on('crm_cms_roles');
         });
     }
 
