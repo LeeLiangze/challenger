@@ -6,6 +6,7 @@ use Arrilot\Widgets\Facade as Widget;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -359,7 +360,7 @@ class Voyager
     protected function getUser($id = null)
     {
         if (is_null($id)) {
-            $id = auth()->check() ? auth()->user()->id : null;
+            $id = Auth::guard('admin')->check() ? Auth::guard('admin')->user()->id : null;
         }
 
         if (is_null($id)) {
