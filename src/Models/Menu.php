@@ -63,7 +63,7 @@ class Menu extends Model
             $user_permissions = null;
 
             if (!Auth::guard('admin')->guest()) {
-                $user = Voyager::model('User')->find(Auth::id());
+                $user = Voyager::model('User')->find(Auth::guard('admin')->user()->id());
                 $user_permissions = $user->role ? $user->role->permissions->pluck('key')->toArray() : [];
             }
 
