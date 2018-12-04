@@ -13,7 +13,7 @@ class VoyagerAuthController extends Controller
 
     public function login()
     {
-        if (Auth::guard('admin')->user()) {
+        if (Auth::user()) {
             return redirect()->route('voyager.dashboard');
         }
 
@@ -35,7 +35,7 @@ class VoyagerAuthController extends Controller
 
         $credentials = $this->credentials($request);
 
-        if (Auth::guard('admin')->attempt($credentials, $request->has('remember'))) {
+        if ($this->guard()->attempt($credentials, $request->has('remember'))) {
             return $this->sendLoginResponse($request);
         }
 
