@@ -161,6 +161,8 @@ return [
 
         'widgets' => [
             'CHG\\Voyager\\Widgets\\UserDimmer',
+            'CHG\\Voyager\\Widgets\\PostDimmer',
+            'CHG\\Voyager\\Widgets\\PageDimmer',
         ],
 
     ],

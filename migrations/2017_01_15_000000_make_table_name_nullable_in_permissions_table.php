@@ -13,7 +13,7 @@ class MakeTableNameNullableInPermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('crm_cms_permissions', function (Blueprint $table) {
+        Schema::table('cmr_cms_permissions', function (Blueprint $table) {
             $table->string('table_name')->nullable()->default(null)->change();
         });
     }
