@@ -2,11 +2,12 @@
 
 namespace CHG\Voyager\Widgets;
 
+use App\Models\Member\Voucher\Voucher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use CHG\Voyager\Facades\Voyager;
 
-class PageDimmer extends BaseDimmer
+class MemberVoucherDimmer extends BaseDimmer
 {
     /**
      * The configuration array.
@@ -21,18 +22,18 @@ class PageDimmer extends BaseDimmer
      */
     public function run()
     {
-        $count = Voyager::model('Page')->count();
-        $string = trans_choice('voyager::dimmer.page', $count);
+        $count = Voucher::count();
+        $string = $count == 1 ? 'Voucher' : 'Vouchers';
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-file-text',
             'title'  => "{$count} {$string}",
-            'text'   => __('voyager::dimmer.page_text', ['count' => $count, 'string' => Str::lower($string)]),
+            'text'   => "{$count} {$string} in database. Click on button to view all {$string}",
             'button' => [
-                'text' => __('voyager::dimmer.page_link_text'),
-                'link' => route('voyager.pages.index'),
+                'text' => "View all {$string}",
+                'link' => route('voyager.crm-voucher-list.index'),
             ],
-            'image' => voyager_asset('images/widget-backgrounds/03.jpg'),
+            'image' => voyager_asset('images/widget-backgrounds/01.jpg'),
         ]));
     }
 
@@ -43,6 +44,6 @@ class PageDimmer extends BaseDimmer
      */
     public function shouldBeDisplayed()
     {
-        return Auth::user()->can('browse', Voyager::model('Page'));
+        return Auth::user()->can('browse', app(Voucher::class));
     }
 }

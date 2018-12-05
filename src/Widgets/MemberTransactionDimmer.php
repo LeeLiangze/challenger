@@ -2,11 +2,12 @@
 
 namespace CHG\Voyager\Widgets;
 
+use App\Models\Member\Transactions\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use CHG\Voyager\Facades\Voyager;
 
-class UserDimmer extends BaseDimmer
+class MemberTransactionDimmer extends BaseDimmer
 {
     /**
      * The configuration array.
@@ -21,18 +22,18 @@ class UserDimmer extends BaseDimmer
      */
     public function run()
     {
-        $count = Voyager::model('User')->count();
-        $string = trans_choice('voyager::dimmer.user', $count);
+        $count = Transaction::count();
+        $string = $count == 1 ? 'Transaction' : 'Transactions';
 
         return view('voyager::dimmer', array_merge($this->config, [
-            'icon'   => 'voyager-group',
+            'icon'   => 'voyager-receipt',
             'title'  => "{$count} {$string}",
-            'text'   => __('voyager::dimmer.user_text', ['count' => $count, 'string' => Str::lower($string)]),
+            'text'   => "{$count} {$string} in database. Click on button to view all {$string}",
             'button' => [
-                'text' => __('voyager::dimmer.user_link_text'),
-                'link' => route('voyager.users.index'),
+                'text' => "View all {$string}",
+                'link' => route('voyager.crm-member-transaction.index'),
             ],
-            'image' => voyager_asset('images/widget-backgrounds/02.jpg'),
+            'image' => voyager_asset('images/widget-backgrounds/01.jpg'),
         ]));
     }
 
@@ -43,6 +44,6 @@ class UserDimmer extends BaseDimmer
      */
     public function shouldBeDisplayed()
     {
-        return Auth::user()->can('browse', Voyager::model('User'));
+        return Auth::user()->can('browse', app(Transaction::class));
     }
 }

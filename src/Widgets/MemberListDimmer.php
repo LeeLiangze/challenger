@@ -2,11 +2,12 @@
 
 namespace CHG\Voyager\Widgets;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use CHG\Voyager\Facades\Voyager;
 
-class PostDimmer extends BaseDimmer
+class MemberListDimmer extends BaseDimmer
 {
     /**
      * The configuration array.
@@ -21,18 +22,18 @@ class PostDimmer extends BaseDimmer
      */
     public function run()
     {
-        $count = Voyager::model('Post')->count();
-        $string = trans_choice('voyager::dimmer.post', $count);
+        $count = User::count();
+        $string = $count == 1 ? 'Member' : 'Members';
 
         return view('voyager::dimmer', array_merge($this->config, [
-            'icon'   => 'voyager-news',
+            'icon'   => 'voyager-people',
             'title'  => "{$count} {$string}",
-            'text'   => __('voyager::dimmer.post_text', ['count' => $count, 'string' => Str::lower($string)]),
+            'text'   => "{$count} {$string} in database. Click on button to view all {$string}",
             'button' => [
-                'text' => __('voyager::dimmer.post_link_text'),
-                'link' => route('voyager.posts.index'),
+                'text' => "View all {$string}",
+                'link' => route('voyager.crm-member-list.index'),
             ],
-            'image' => voyager_asset('images/widget-backgrounds/02.jpg'),
+            'image' => voyager_asset('images/widget-backgrounds/03.jpg'),
         ]));
     }
 
@@ -43,6 +44,6 @@ class PostDimmer extends BaseDimmer
      */
     public function shouldBeDisplayed()
     {
-        return Auth::user()->can('browse', Voyager::model('Post'));
+        return Auth::user()->can('browse', app(User::class));
     }
 }

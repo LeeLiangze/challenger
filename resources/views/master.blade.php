@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ voyager_asset('images/logo-icon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ voyager_asset('images/favicon.ico') }}" type="image/x-icon">
 
 
 
