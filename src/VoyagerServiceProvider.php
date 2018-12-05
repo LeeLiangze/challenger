@@ -256,7 +256,7 @@ class VoyagerServiceProvider extends ServiceProvider
         // otherwise it will throw an error because no database
         // connection has been made yet.
         try {
-            if (Schema::hasTable('data_types')) {
+            if (Schema::hasTable('crm_cms_data_types')) {
                 $dataType = VoyagerFacade::model('DataType');
                 $dataTypes = $dataType->select('policy_name', 'model_name')->get();
 

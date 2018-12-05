@@ -196,12 +196,12 @@ class VoyagerDatabaseController extends Controller
     public function cleanOldAndCreateNew($originalName, $tableName)
     {
         if (!empty($originalName) && $originalName != $tableName) {
-            $dt = DB::table('data_types')->where('name', $originalName);
+            $dt = DB::table('crm_cms_data_types')->where('name', $originalName);
             if ($dt->get()) {
                 $dt->delete();
             }
 
-            $perm = DB::table('permissions')->where('table_name', $originalName);
+            $perm = DB::table('crm_cms_permissions')->where('table_name', $originalName);
             if ($perm->get()) {
                 $perm->delete();
             }
