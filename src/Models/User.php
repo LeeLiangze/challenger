@@ -11,7 +11,8 @@ use CHG\Voyager\Traits\VoyagerUser;
 class User extends Authenticatable implements UserContract
 {
     use VoyagerUser,
-        HasRelationships;
+        HasRelationships,
+        HasApiTokens;
 
     protected $guard = 'admin';
 
