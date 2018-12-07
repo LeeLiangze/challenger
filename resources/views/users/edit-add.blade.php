@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="panel panel-bordered">
-                    {{-- <div class="panel"> --}}
+                        {{-- <div class="panel"> --}}
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <ul>
@@ -43,6 +43,12 @@
                                 <label for="name">{{ __('voyager::generic.name') }}</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('voyager::generic.name') }}"
                                        value="@if(isset($dataTypeContent->name)){{ $dataTypeContent->name }}@endif">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">User Id</label>
+                                <input type="text" class="form-control" id="name" name="usr_id" placeholder="User Id"
+                                       value="@if(isset($dataTypeContent->usr_id)){{ $dataTypeContent->user_id }}@endif">
                             </div>
 
                             <div class="form-group">
@@ -81,19 +87,19 @@
                                 </div>
                             @endcan
                             @php
-                            if (isset($dataTypeContent->locale)) {
-                                $selected_locale = $dataTypeContent->locale;
-                            } else {
-                                $selected_locale = config('app.locale', 'en');
-                            }
+                                if (isset($dataTypeContent->locale)) {
+                                    $selected_locale = $dataTypeContent->locale;
+                                } else {
+                                    $selected_locale = config('app.locale', 'en');
+                                }
 
                             @endphp
                             <div class="form-group">
                                 <label for="locale">{{ __('voyager::generic.locale') }}</label>
                                 <select class="form-control select2" id="locale" name="locale">
                                     @foreach (Voyager::getLocales() as $locale)
-                                    <option value="{{ $locale }}"
-                                    {{ ($locale == $selected_locale ? 'selected' : '') }}>{{ $locale }}</option>
+                                        <option value="{{ $locale }}"
+                                                {{ ($locale == $selected_locale ? 'selected' : '') }}>{{ $locale }}</option>
                                     @endforeach
                                 </select>
                             </div>

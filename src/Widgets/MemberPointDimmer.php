@@ -33,7 +33,7 @@ class MemberPointDimmer extends BaseDimmer
                 'text' => "View all {$string}",
                 'link' => route('voyager.crm-member-points.index'),
             ],
-            'image' => voyager_asset('images/widget-backgrounds/02.jpg'),
+            'image' => voyager_asset('images/widget-backgrounds/05.jpg'),
         ]));
     }
 
