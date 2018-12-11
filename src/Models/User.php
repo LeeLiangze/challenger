@@ -34,6 +34,10 @@ class User extends Authenticatable implements UserContract
         return $value;
     }
 
+    public function findForPassport($username) {
+        return $this->orWhere('usr_id', $username)->orWhere('email',$username)->first();
+    }
+
     public function setCreatedAtAttribute($value)
     {
         $this->attributes['created_at'] = Carbon::parse($value)->format('Y-m-d H:i:s');
