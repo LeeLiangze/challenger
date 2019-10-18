@@ -235,6 +235,9 @@ class VoyagerServiceProvider extends ServiceProvider
             'config' => [
                 "{$publishablePath}/config/voyager.php" => config_path('voyager.php'),
             ],
+            'cas' => [
+                "{$publishablePath}/config/cas.php" => config_path('cas.php'),
+            ],
 
         ];
 

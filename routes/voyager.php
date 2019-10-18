@@ -24,7 +24,7 @@ Route::group(['as' => 'voyager.'], function () {
     Route::get('login', ['uses' => $namespacePrefix.'VoyagerAuthController@login',     'as' => 'login']);
     Route::post('login', ['uses' => $namespacePrefix.'VoyagerAuthController@postLogin', 'as' => 'postlogin']);
 
-    Route::group(['middleware' => 'admin.user'], function () use ($namespacePrefix) {
+    Route::group(['middleware' => 'cas.auth'], function () use ($namespacePrefix) {
         event(new RoutingAdmin());
 
         // Main Admin and Logout Route
