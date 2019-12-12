@@ -43,7 +43,7 @@ class BasePolicy
      *
      * @return bool
      */
-    protected function checkPermission(User $user, $model, $action)
+    protected function checkPermission($user, $model, $action)
     {
         if (!isset(self::$datatypes[get_class($model)])) {
             $dataType = Voyager::model('DataType');

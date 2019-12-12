@@ -14,7 +14,7 @@ class SettingPolicy extends BasePolicy
      *
      * @return bool
      */
-    public function browse(User $user, $model)
+    public function browse($user, $model)
     {
         return $user->hasPermission('browse_settings');
     }
@@ -27,7 +27,7 @@ class SettingPolicy extends BasePolicy
      *
      * @return bool
      */
-    public function read(User $user, $model)
+    public function read($user, $model)
     {
         return $user->hasPermission('read_settings');
     }
@@ -40,7 +40,7 @@ class SettingPolicy extends BasePolicy
      *
      * @return bool
      */
-    public function edit(User $user, $model)
+    public function edit($user, $model)
     {
         return $user->hasPermission('edit_settings');
     }
@@ -53,7 +53,7 @@ class SettingPolicy extends BasePolicy
      *
      * @return bool
      */
-    public function add(User $user, $model)
+    public function add($user, $model)
     {
         return $user->hasPermission('add_settings');
     }
@@ -66,7 +66,7 @@ class SettingPolicy extends BasePolicy
      *
      * @return bool
      */
-    public function delete(User $user, $model)
+    public function delete($user, $model)
     {
         return $user->hasPermission('delete_settings');
     }

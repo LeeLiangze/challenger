@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="{{ voyager_asset('css/rtl.css') }}">
     @endif
 
-    <!-- Few Dynamic Styles -->
+<!-- Few Dynamic Styles -->
     <style type="text/css">
         .voyager .side-menu .navbar-header {
             background:{{ config('voyager.primary_color','#22A7F0') }};
@@ -40,7 +40,7 @@
     </style>
 
     @if(!empty(config('voyager.additional_css')))<!-- Additional CSS -->
-        @foreach(config('voyager.additional_css') as $css)<link rel="stylesheet" type="text/css" href="{{ asset($css) }}">@endforeach
+    @foreach(config('voyager.additional_css') as $css)<link rel="stylesheet" type="text/css" href="{{ asset($css) }}">@endforeach
     @endif
 
     @yield('head')
@@ -57,14 +57,6 @@
     @endif
 </div>
 
-<?php
-if (starts_with(Auth::user()->avatar, 'http://') || starts_with(Auth::user()->avatar, 'https://')) {
-    $user_avatar = Auth::user()->avatar;
-} else {
-    $user_avatar = Voyager::image(Auth::user()->avatar);
-}
-?>
-
 <div class="app-container">
     <div class="fadetoblack visible-xs"></div>
     <div class="row content-container">
@@ -72,28 +64,28 @@ if (starts_with(Auth::user()->avatar, 'http://') || starts_with(Auth::user()->av
         @include('voyager::dashboard.sidebar')
         <script>
             (function(){
-                    var appContainer = document.querySelector('.app-container'),
-                        sidebar = appContainer.querySelector('.side-menu'),
-                        navbar = appContainer.querySelector('nav.navbar.navbar-top'),
-                        loader = document.getElementById('voyager-loader'),
-                        hamburgerMenu = document.querySelector('.hamburger'),
-                        sidebarTransition = sidebar.style.transition,
-                        navbarTransition = navbar.style.transition,
-                        containerTransition = appContainer.style.transition;
+                var appContainer = document.querySelector('.app-container'),
+                    sidebar = appContainer.querySelector('.side-menu'),
+                    navbar = appContainer.querySelector('nav.navbar.navbar-top'),
+                    loader = document.getElementById('voyager-loader'),
+                    hamburgerMenu = document.querySelector('.hamburger'),
+                    sidebarTransition = sidebar.style.transition,
+                    navbarTransition = navbar.style.transition,
+                    containerTransition = appContainer.style.transition;
 
-                    sidebar.style.WebkitTransition = sidebar.style.MozTransition = sidebar.style.transition =
+                sidebar.style.WebkitTransition = sidebar.style.MozTransition = sidebar.style.transition =
                     appContainer.style.WebkitTransition = appContainer.style.MozTransition = appContainer.style.transition =
-                    navbar.style.WebkitTransition = navbar.style.MozTransition = navbar.style.transition = 'none';
+                        navbar.style.WebkitTransition = navbar.style.MozTransition = navbar.style.transition = 'none';
 
-                    if (window.localStorage && window.localStorage['voyager.stickySidebar'] == 'true') {
-                        appContainer.className += ' expanded no-animation';
-                        loader.style.left = (sidebar.clientWidth/2)+'px';
-                        hamburgerMenu.className += ' is-active no-animation';
-                    }
+                if (window.localStorage && window.localStorage['voyager.stickySidebar'] == 'true') {
+                    appContainer.className += ' expanded no-animation';
+                    loader.style.left = (sidebar.clientWidth/2)+'px';
+                    hamburgerMenu.className += ' is-active no-animation';
+                }
 
-                   navbar.style.WebkitTransition = navbar.style.MozTransition = navbar.style.transition = navbarTransition;
-                   sidebar.style.WebkitTransition = sidebar.style.MozTransition = sidebar.style.transition = sidebarTransition;
-                   appContainer.style.WebkitTransition = appContainer.style.MozTransition = appContainer.style.transition = containerTransition;
+                navbar.style.WebkitTransition = navbar.style.MozTransition = navbar.style.transition = navbarTransition;
+                sidebar.style.WebkitTransition = sidebar.style.MozTransition = sidebar.style.transition = sidebarTransition;
+                appContainer.style.WebkitTransition = appContainer.style.MozTransition = appContainer.style.transition = containerTransition;
             })();
         </script>
         <!-- Main Content -->
@@ -115,9 +107,9 @@ if (starts_with(Auth::user()->avatar, 'http://') || starts_with(Auth::user()->av
 
 
 <script>
-    @if(Session::has('alerts'))
-        let alerts = {!! json_encode(Session::get('alerts')) !!};
-        helpers.displayAlerts(alerts, toastr);
+            @if(Session::has('alerts'))
+    let alerts = {!! json_encode(Session::get('alerts')) !!};
+    helpers.displayAlerts(alerts, toastr);
     @endif
 
     @if(Session::has('message'))
@@ -138,7 +130,7 @@ if (starts_with(Auth::user()->avatar, 'http://') || starts_with(Auth::user()->av
 @yield('javascript')
 
 @if(!empty(config('voyager.additional_js')))<!-- Additional Javascript -->
-    @foreach(config('voyager.additional_js') as $js)<script type="text/javascript" src="{{ asset($js) }}"></script>@endforeach
+@foreach(config('voyager.additional_js') as $js)<script type="text/javascript" src="{{ asset($js) }}"></script>@endforeach
 @endif
 
 </body>

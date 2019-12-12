@@ -57,7 +57,8 @@ class Menu extends Model
 
         // Set static vars values for admin menus
         if (in_array($type, ['admin', 'admin_menu'])) {
-            $permissions = Voyager::model('Permission')->all();
+//            $permissions = Voyager::model('Permission')->all();
+            $permissions = cas()->getAttribute('permission');
             $dataTypes = Voyager::model('DataType')->all();
             $prefix = trim(route('voyager.dashboard', [], false), '/');
             $user_permissions = null;

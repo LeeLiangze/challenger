@@ -80,20 +80,20 @@ class VoyagerServiceProvider extends ServiceProvider
      */
     public function boot(Router $router, Dispatcher $event)
     {
-        if (config('voyager.user.add_default_role_on_register')) {
-            $app_user = config('voyager.user.namespace') ?: config('auth.providers.admins.model');
-            $app_user::created(function ($user) {
-                if (is_null($user->role_id)) {
-                    VoyagerFacade::model('User')->findOrFail($user->id)
-                        ->setRole(config('voyager.user.default_role'))
-                        ->save();
-                }
-            });
-        }
+//        if (config('voyager.user.add_default_role_on_register')) {
+//            $app_user = config('voyager.user.namespace') ?: config('auth.providers.admins.model');
+//            $app_user::created(function ($user) {
+//                if (is_null($user->role_id)) {
+//                    VoyagerFacade::model('User')->findOrFail($user->id)
+//                        ->setRole(config('voyager.user.default_role'))
+//                        ->save();
+//                }
+//            });
+//        }
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'voyager');
 
-        $router->aliasMiddleware('admin.user', VoyagerAdminMiddleware::class);
+//        $router->aliasMiddleware('admin.user', VoyagerAdminMiddleware::class);
 
         $this->loadTranslationsFrom(realpath(__DIR__.'/../publishable/lang'), 'voyager');
 
@@ -107,9 +107,9 @@ class VoyagerServiceProvider extends ServiceProvider
 
         $this->registerViewComposers();
 
-        $event->listen('voyager.alerts.collecting', function () {
-            $this->addStorageSymlinkAlert();
-        });
+//        $event->listen('voyager.alerts.collecting', function () {
+//            $this->addStorageSymlinkAlert();
+//        });
 
         $this->bootTranslatorCollectionMacros();
     }

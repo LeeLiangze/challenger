@@ -29,7 +29,7 @@ Route::group(['as' => 'voyager.'], function () {
 
         // Main Admin and Logout Route
         Route::get('/', ['uses' => $namespacePrefix.'VoyagerController@index',   'as' => 'dashboard']);
-        Route::post('logout', ['uses' => $namespacePrefix.'VoyagerController@logout',  'as' => 'logout']);
+        Route::get('logout', ['uses' => $namespacePrefix.'VoyagerController@logout',  'as' => 'logout']);
         Route::post('upload', ['uses' => $namespacePrefix.'VoyagerController@upload',  'as' => 'upload']);
 
         Route::get('profile', ['uses' => $namespacePrefix.'VoyagerController@profile', 'as' => 'profile']);
@@ -37,8 +37,8 @@ Route::group(['as' => 'voyager.'], function () {
         try {
             foreach (DataType::all() as $dataType) {
                 $breadController = $dataType->controller
-                                 ? $dataType->controller
-                                 : $namespacePrefix.'VoyagerBaseController';
+                    ? $dataType->controller
+                    : $namespacePrefix.'VoyagerBaseController';
 
                 Route::get($dataType->slug.'/order', $breadController.'@order')->name($dataType->slug.'.order');
                 Route::post($dataType->slug.'/order', $breadController.'@update_order')->name($dataType->slug.'.order');

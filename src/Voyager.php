@@ -60,11 +60,8 @@ class Voyager
         'Menu'        => Menu::class,
         'MenuItem'    => MenuItem::class,
         'Page'        => Page::class,
-        'Permission'  => Permission::class,
         'Post'        => Post::class,
-        'Role'        => Role::class,
         'Setting'     => Setting::class,
-        'User'        => User::class,
         'Translation' => Translation::class,
     ];
 
@@ -73,7 +70,6 @@ class Voyager
     public function __construct()
     {
         $this->filesystem = app(Filesystem::class);
-
         $this->findVersion();
     }
 
@@ -242,20 +238,7 @@ class Voyager
     {
         $this->loadPermissions();
 
-        // Check if permission exist
-        $exist = $this->permissions->where('key', $permission)->first();
-
-        // Permission not found
-        if (!$exist) {
-            throw new \Exception('Permission does not exist', 400);
-        }
-
-        $user = $this->getUser();
-        if ($user == null || !$user->hasPermission($permission)) {
-            return false;
-        }
-
-        return true;
+        return in_array($permission, $this->permissions);
     }
 
     /** @deprecated */
@@ -355,25 +338,22 @@ class Voyager
         if (!$this->permissionsLoaded) {
             $this->permissionsLoaded = true;
 
-            $this->permissions = self::model('Permission')->all();
+            $cas_permissions = cas()->getAttribute('permission');
+            $_permissions = array();
+            foreach ($cas_permissions as $permission) {
+                $permission_exp = explode(":", $permission);
+                if ($permission_exp[0] == env('CLIENT_NAME')){
+                    $_permissions[] = $permission_exp[2] . "_" . $permission_exp[1];
+                }
+            }
+
+            $this->permissions = $_permissions;
         }
     }
 
     protected function getUser($id = null)
     {
-        if (is_null($id)) {
-            $id = auth()->check() ? auth()->user()->id : null;
-        }
-
-        if (is_null($id)) {
-            return;
-        }
-
-        if (!isset($this->users[$id])) {
-            $this->users[$id] = self::model('User')->find($id);
-        }
-
-        return $this->users[$id];
+        return cas()->checkAuthentication() ? cas()->user() : null;
     }
 
     public function getLocales()

@@ -20,11 +20,11 @@ class MenuItemPolicy extends BasePolicy
      *
      * @return bool
      */
-    protected function checkPermission(User $user, $model, $action)
+    protected function checkPermission($model, $action)
     {
-        if (self::$permissions == null) {
-            self::$permissions = Voyager::model('Permission')->all();
-        }
+//        if (self::$permissions == null) {
+//            self::$permissions = Voyager::model('Permission')->all();
+//        }
 
         if (self::$datatypes == null) {
             self::$datatypes = DataType::all()->keyBy('slug');
@@ -46,10 +46,10 @@ class MenuItemPolicy extends BasePolicy
             $action = 'browse';
         }
 
-        // If permission doesn't exist, we can't check it!
-        if (!self::$permissions->contains('key', $action.'_'.$slug)) {
-            return true;
-        }
+//        // If permission doesn't exist, we can't check it!
+//        if (!self::$permissions->contains('key', $action.'_'.$slug)) {
+//            return true;
+//        }
 
         return $user->hasPermission($action.'_'.$slug);
     }
