@@ -37,7 +37,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        $this->authorize('browse', app($dataType->model_name));
+        Voyager::canOrFail();
 
         $getter = $dataType->server_side ? 'paginate' : 'get';
 
@@ -142,7 +142,7 @@ class VoyagerBaseController extends Controller
         $this->removeRelationshipField($dataType, 'read');
 
         // Check permission
-        $this->authorize('read', $dataTypeContent);
+        Voyager::canOrFail();
 
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
@@ -188,7 +188,7 @@ class VoyagerBaseController extends Controller
         $this->removeRelationshipField($dataType, 'edit');
 
         // Check permission
-        $this->authorize('edit', $dataTypeContent);
+        Voyager::canOrFail();
 
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
@@ -215,7 +215,7 @@ class VoyagerBaseController extends Controller
         $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
 
         // Check permission
-        $this->authorize('edit', $data);
+        Voyager::canOrFail();
 
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->editRows, $dataType->name, $id);
@@ -258,7 +258,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        $this->authorize('add', app($dataType->model_name));
+        Voyager::canOrFail();
 
         $dataTypeContent = (strlen($dataType->model_name) != 0)
                             ? new $dataType->model_name()
@@ -297,7 +297,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        $this->authorize('add', app($dataType->model_name));
+        Voyager::canOrFail();
 
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->addRows);
@@ -343,7 +343,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        $this->authorize('delete', app($dataType->model_name));
+        Voyager::canOrFail();
 
         // Init array of IDs
         $ids = [];
@@ -455,7 +455,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        $this->authorize('edit', app($dataType->model_name));
+        Voyager::canOrFail();
 
         if (!isset($dataType->order_column) || !isset($dataType->order_display_column)) {
             return redirect()
@@ -491,7 +491,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        $this->authorize('edit', app($dataType->model_name));
+        Voyager::canOrFail();
 
         $model = app($dataType->model_name);
 

@@ -347,7 +347,6 @@
 
         <div style="clear:both"></div>
 
-        @can('add', Voyager::model('Setting'))
         <div class="panel" style="margin-top:10px;">
             <div class="panel-heading new-setting">
                 <hr>
@@ -408,7 +407,6 @@
                 </form>
             </div>
         </div>
-        @endcan
     </div>
 
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">

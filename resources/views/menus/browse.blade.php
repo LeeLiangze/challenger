@@ -5,11 +5,9 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="voyager-list-add"></i> {{ $dataType->display_name_plural }}
-        @can('add',app($dataType->model_name))
             <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success">
                 <i class="voyager-plus"></i> {{ __('voyager::generic.add_new') }}
             </a>
-        @endcan
     </h1>
 @stop
 
@@ -44,21 +42,15 @@
                                     </td>
                                     @endforeach
                                     <td class="no-sort no-click bread-actions">
-                                        @can('delete', $data)
                                             <div class="btn btn-sm btn-danger pull-right delete" data-id="{{ $data->{$data->getKeyName()} }}">
                                                 <i class="voyager-trash"></i> {{ __('voyager::generic.delete') }}
                                             </div>
-                                        @endcan
-                                        @can('edit', $data)
                                             <a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->{$data->getKeyName()}) }}" class="btn btn-sm btn-primary pull-right edit">
                                                 <i class="voyager-edit"></i> {{ __('voyager::generic.edit') }}
                                             </a>
-                                        @endcan
-                                        @can('edit', $data)
                                             <a href="{{ route('voyager.'.$dataType->slug.'.builder', $data->{$data->getKeyName()}) }}" class="btn btn-sm btn-success pull-right">
                                                 <i class="voyager-list"></i> {{ __('voyager::generic.builder') }}
                                             </a>
-                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach

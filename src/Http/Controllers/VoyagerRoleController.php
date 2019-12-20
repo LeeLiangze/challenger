@@ -15,7 +15,7 @@ class VoyagerRoleController extends VoyagerBaseController
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        $this->authorize('edit', app($dataType->model_name));
+        Voyager::canOrFail();
 
         //Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->editRows);
@@ -47,7 +47,7 @@ class VoyagerRoleController extends VoyagerBaseController
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        $this->authorize('add', app($dataType->model_name));
+        Voyager::canOrFail();
 
         //Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->addRows);

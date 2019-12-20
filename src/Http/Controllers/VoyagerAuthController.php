@@ -9,6 +9,7 @@ use CHG\Voyager\Facades\Voyager;
 
 class VoyagerAuthController extends Controller
 {
+
     use AuthenticatesUsers;
 
     public function login()
@@ -54,4 +55,5 @@ class VoyagerAuthController extends Controller
     {
         return config('voyager.user.redirect', route('voyager.dashboard'));
     }
+
 }

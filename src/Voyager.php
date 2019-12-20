@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use CHG\Voyager\Actions\DeleteAction;
@@ -238,20 +239,12 @@ class Voyager
     }
 
     /** @deprecated */
-    public function can($permission)
+    public function can()
     {
         $this->loadPermissions();
 
-        // Check if permission exist
-        $exist = $this->permissions->where('key', $permission)->first();
-
         // Permission not found
-        if (!$exist) {
-            throw new \Exception('Permission does not exist', 400);
-        }
-
-        $user = $this->getUser();
-        if ($user == null || !$user->hasPermission($permission)) {
+        if (!(in_array("MIS_ADM", $this->permissions) || in_array("SYS_ADM", $this->permissions))) {
             return false;
         }
 
@@ -259,9 +252,9 @@ class Voyager
     }
 
     /** @deprecated */
-    public function canOrFail($permission)
+    public function canOrFail()
     {
-        if (!$this->can($permission)) {
+        if (!$this->can()) {
             throw new AccessDeniedHttpException();
         }
 
@@ -269,9 +262,9 @@ class Voyager
     }
 
     /** @deprecated */
-    public function canOrAbort($permission, $statusCode = 403)
+    public function canOrAbort($statusCode = 403)
     {
-        if (!$this->can($permission)) {
+        if (!$this->can()) {
             return abort($statusCode);
         }
 
@@ -355,7 +348,10 @@ class Voyager
         if (!$this->permissionsLoaded) {
             $this->permissionsLoaded = true;
 
-            $this->permissions = self::model('Permission')->all();
+            $permissions = Session::get("rights");
+            foreach ($permissions as $permission) {
+                array_push($this->permissions, $permission);
+            }
         }
     }
 
@@ -379,5 +375,14 @@ class Voyager
     public function getLocales()
     {
         return array_diff(scandir(realpath(__DIR__.'/../publishable/lang')), ['..', '.']);
+    }
+
+    public function getId(){
+        return Session::get('id');
+    }
+
+    public function getName()
+    {
+        return Session::get('name');
     }
 }

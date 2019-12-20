@@ -80,16 +80,16 @@ class VoyagerServiceProvider extends ServiceProvider
      */
     public function boot(Router $router, Dispatcher $event)
     {
-        if (config('voyager.user.add_default_role_on_register')) {
-            $app_user = config('voyager.user.namespace') ?: config('auth.providers.admins.model');
-            $app_user::created(function ($user) {
-                if (is_null($user->role_id)) {
-                    VoyagerFacade::model('User')->findOrFail($user->id)
-                        ->setRole(config('voyager.user.default_role'))
-                        ->save();
-                }
-            });
-        }
+//        if (config('voyager.user.add_default_role_on_register')) {
+//            $app_user = config('voyager.user.namespace') ?: config('auth.providers.admins.model');
+//            $app_user::created(function ($user) {
+//                if (is_null($user->role_id)) {
+//                    VoyagerFacade::model('User')->findOrFail($user->id)
+//                        ->setRole(config('voyager.user.default_role'))
+//                        ->save();
+//                }
+//            });
+//        }
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'voyager');
 
@@ -106,10 +106,6 @@ class VoyagerServiceProvider extends ServiceProvider
         $this->registerGates();
 
         $this->registerViewComposers();
-
-        $event->listen('voyager.alerts.collecting', function () {
-            $this->addStorageSymlinkAlert();
-        });
 
         $this->bootTranslatorCollectionMacros();
     }
@@ -135,44 +131,6 @@ class VoyagerServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Add storage symlink alert.
-     */
-    protected function addStorageSymlinkAlert()
-    {
-        if (app('router')->current() !== null) {
-            $currentRouteAction = app('router')->current()->getAction();
-        } else {
-            $currentRouteAction = null;
-        }
-        $routeName = is_array($currentRouteAction) ? array_get($currentRouteAction, 'as') : null;
-
-        if ($routeName != 'voyager.dashboard') {
-            return;
-        }
-
-        $storage_disk = (!empty(config('voyager.storage.disk'))) ? config('voyager.storage.disk') : 'public';
-
-        if (request()->has('fix-missing-storage-symlink')) {
-            if (file_exists(public_path('storage'))) {
-                if (@readlink(public_path('storage')) == public_path('storage')) {
-                    rename(public_path('storage'), 'storage_old');
-                }
-            }
-
-            if (!file_exists(public_path('storage'))) {
-                $this->fixMissingStorageSymlink();
-            }
-        } elseif ($storage_disk == 'public') {
-            if (!file_exists(public_path('storage')) || @readlink(public_path('storage')) == public_path('storage')) {
-                $alert = (new Alert('missing-storage-symlink', 'warning'))
-                    ->title(__('voyager::error.symlink_missing_title'))
-                    ->text(__('voyager::error.symlink_missing_text'))
-                    ->button(__('voyager::error.symlink_missing_button'), '?fix-missing-storage-symlink=1');
-                VoyagerFacade::addAlert($alert);
-            }
-        }
-    }
 
     protected function fixMissingStorageSymlink()
     {

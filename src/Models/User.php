@@ -8,14 +8,14 @@ use CHG\Voyager\Contracts\User as UserContract;
 use CHG\Voyager\Traits\HasRelationships;
 use CHG\Voyager\Traits\VoyagerUser;
 
-class User extends Authenticatable implements UserContract
+class User extends Authenticatable
 {
-    use VoyagerUser,
-        HasRelationships;
 
     protected $guard = 'admin';
 
     protected $table = 'crm_cms_users';
+
+//    protected $primaryKey = 'usr_id';
 
     protected $guarded = [];
 

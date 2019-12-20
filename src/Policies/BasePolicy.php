@@ -5,6 +5,7 @@ namespace CHG\Voyager\Policies;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use CHG\Voyager\Contracts\User;
 use CHG\Voyager\Facades\Voyager;
+use Illuminate\Support\Facades\Auth;
 
 class BasePolicy
 {
@@ -45,6 +46,7 @@ class BasePolicy
      */
     protected function checkPermission(User $user, $model, $action)
     {
+        $rights = Auth::user()->rights();
         if (!isset(self::$datatypes[get_class($model)])) {
             $dataType = Voyager::model('DataType');
             self::$datatypes[get_class($model)] = $dataType->where('model_name', get_class($model))->first();

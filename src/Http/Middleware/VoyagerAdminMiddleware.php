@@ -5,6 +5,7 @@ namespace CHG\Voyager\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use CHG\Voyager\Facades\Voyager;
+use Illuminate\Support\Facades\Session;
 
 class VoyagerAdminMiddleware
 {
@@ -18,13 +19,14 @@ class VoyagerAdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::guest()) {
-            $user = auth()->user();
-            if (isset($user->locale)) {
-                app()->setLocale($user->locale);
+        if (Session::get('id')) {
+            $rights = Session::get('rights');
+
+            if (in_array("MIS_ADM", $rights) || in_array("SYS_ADM", $rights)){
+                return $next($request);
             }
 
-            return $user->hasPermission('browse_admin') ? $next($request) : redirect('/');
+            return redirect('/');
         }
 
         $urlLogin = route('voyager.login');

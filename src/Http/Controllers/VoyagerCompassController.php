@@ -21,7 +21,7 @@ class VoyagerCompassController extends Controller
     public function index(Request $request)
     {
         // Check permission
-        Voyager::canOrFail('browse_compass');
+        Voyager::canOrFail();
 
         $message = '';
         $active_tab = '';
