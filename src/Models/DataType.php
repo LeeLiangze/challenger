@@ -14,7 +14,7 @@ class DataType extends Model
 
     protected $translatable = ['display_name_singular', 'display_name_plural'];
 
-    protected $table = 'crm_cms_data_types';
+    protected $table = 'sys_cms_data_types';
 
     protected $fillable = [
         'name',

@@ -10,7 +10,7 @@ class Role extends Model
 {
     use HasRelationships;
 
-    protected $table = 'crm_cms_roles';
+    protected $table = 'sys_cms_roles';
 
     protected $guarded = [];
 
@@ -18,13 +18,13 @@ class Role extends Model
     {
         $userModel = Voyager::modelClass('User');
 
-        return $this->belongsToMany($userModel, 'crm_cms_user_roles')
+        return $this->belongsToMany($userModel, 'sys_cms_user_roles')
                     ->select(app($userModel)->getTable().'.*')
                     ->union($this->hasMany($userModel))->getQuery();
     }
 
     public function permissions()
     {
-        return $this->belongsToMany(Voyager::modelClass('Permission'),'crm_cms_permission_role');
+        return $this->belongsToMany(Voyager::modelClass('Permission'),'sys_cms_permission_role');
     }
 }

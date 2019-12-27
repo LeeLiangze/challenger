@@ -6,12 +6,14 @@ use Arrilot\Widgets\Facade as Widget;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Illuminate\Support\Str;
 use CHG\Voyager\Actions\DeleteAction;
 use CHG\Voyager\Actions\EditAction;
+use CHG\Voyager\Actions\RestoreAction;
 use CHG\Voyager\Actions\ViewAction;
 use CHG\Voyager\Events\AlertsCollection;
 use CHG\Voyager\FormFields\After\HandlerInterface as AfterHandlerInterface;
@@ -50,6 +52,7 @@ class Voyager
 
     protected $actions = [
         DeleteAction::class,
+        RestoreAction::class,
         EditAction::class,
         ViewAction::class,
     ];
@@ -80,7 +83,7 @@ class Voyager
 
     public function model($name)
     {
-        return app($this->models[studly_case($name)]);
+        return app($this->models[Str::studly($name)]);
     }
 
     public function modelClass($name)
@@ -96,18 +99,18 @@ class Voyager
 
         $class = get_class($object);
 
-        if (isset($this->models[studly_case($name)]) && !$object instanceof $this->models[studly_case($name)]) {
-            throw new \Exception("[{$class}] must be instance of [{$this->models[studly_case($name)]}].");
+        if (isset($this->models[Str::studly($name)]) && !$object instanceof $this->models[Str::studly($name)]) {
+            throw new \Exception("[{$class}] must be instance of [{$this->models[Str::studly($name)]}].");
         }
 
-        $this->models[studly_case($name)] = $class;
+        $this->models[Str::studly($name)] = $class;
 
         return $this;
     }
 
     public function view($name, array $parameters = [])
     {
-        foreach (array_get($this->viewLoadingEvents, $name, []) as $event) {
+        foreach (Arr::get($this->viewLoadingEvents, $name, []) as $event) {
             $event($name, $parameters);
         }
 
@@ -208,10 +211,27 @@ class Voyager
 
     public function setting($key, $default = null)
     {
+        $globalCache = config('voyager.settings.cache', false);
+
+        if ($globalCache && Cache::tags('settings')->has($key)) {
+            return Cache::tags('settings')->get($key);
+        }
+
         if ($this->setting_cache === null) {
+            if ($globalCache) {
+                // A key is requested that is not in the cache
+                // this is a good opportunity to update all keys
+                // albeit not strictly necessary
+                Cache::tags('settings')->flush();
+            }
+
             foreach (self::model('Setting')->all() as $setting) {
                 $keys = explode('.', $setting->key);
                 @$this->setting_cache[$keys[0]][$keys[1]] = $setting->value;
+
+                if ($globalCache) {
+                    Cache::tags('settings')->forever($setting->key, $setting->value);
+                }
             }
         }
 
@@ -239,12 +259,30 @@ class Voyager
     }
 
     /** @deprecated */
-    public function can()
+    public function can($permission='')
     {
         $this->loadPermissions();
 
-        // Permission not found
-        if (!(in_array("MIS_ADM", $this->permissions) || in_array("SYS_ADM", $this->permissions))) {
+        if ($permission == 'promo'){
+            if (in_array("MIS_ADM", $this->permissions) || in_array("SYS_ADM", $this->permissions) || in_array("SUPER", $this->permissions)) {
+                return true;
+            }
+            return false;
+        } else if ($permission == 'sales') {
+            if (in_array("MIS_ADM", $this->permissions) || in_array("CASHIER_SUP", $this->permissions) || in_array("SUPER", $this->permissions)) {
+                return true;
+            }
+            return false;
+        } else if ($permission == 'super') {
+            if (in_array("SUPER", $this->permissions)) {
+                return true;
+            }
+            return false;
+        }
+        else {
+            if (in_array("MIS_ADM", $this->permissions) || in_array("SYS_ADM", $this->permissions) || in_array("CASHIER_SUP", $this->permissions) || in_array("SUPER", $this->permissions)) {
+                return true;
+            }
             return false;
         }
 
@@ -252,9 +290,9 @@ class Voyager
     }
 
     /** @deprecated */
-    public function canOrFail()
+    public function canOrFail($permission='')
     {
-        if (!$this->can()) {
+        if (!$this->can($permission)) {
             throw new AccessDeniedHttpException();
         }
 
@@ -262,9 +300,9 @@ class Voyager
     }
 
     /** @deprecated */
-    public function canOrAbort($statusCode = 403)
+    public function canOrAbort($permission='', $statusCode = 403)
     {
-        if (!$this->can()) {
+        if (!$this->can($permission)) {
             return abort($statusCode);
         }
 

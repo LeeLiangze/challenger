@@ -13,11 +13,11 @@ class CreateUserRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('crm_cms_user_roles', function (Blueprint $table) {
+        Schema::create('sys_cms_user_roles', function (Blueprint $table) {
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('crm_cms_users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('sys_cms_users')->onDelete('cascade');
             $table->integer('role_id')->unsigned()->index();
-            $table->foreign('role_id')->references('id')->on('crm_cms_roles')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('sys_cms_roles')->onDelete('cascade');
             $table->primary(['user_id', 'role_id']);
         });
     }
@@ -29,6 +29,6 @@ class CreateUserRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('crm_cms_user_roles');
+        Schema::dropIfExists('sys_cms_user_roles');
     }
 }

@@ -11,7 +11,7 @@ class VoyagerSettingsController extends Controller
     public function index()
     {
         // Check permission
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $data = Voyager::model('Setting')->orderBy('order', 'ASC')->get();
 
@@ -44,7 +44,7 @@ class VoyagerSettingsController extends Controller
     public function store(Request $request)
     {
         // Check permission
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $key = implode('.', [str_slug($request->input('group')), $request->input('key')]);
         $key_check = Voyager::model('Setting')->where('key', $key)->get()->count();
@@ -81,7 +81,7 @@ class VoyagerSettingsController extends Controller
     public function update(Request $request)
     {
         // Check permission
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $settings = Voyager::model('Setting')->all();
 
@@ -120,7 +120,7 @@ class VoyagerSettingsController extends Controller
     public function delete($id)
     {
         // Check permission
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $setting = Voyager::model('Setting')->find($id);
 
@@ -137,12 +137,12 @@ class VoyagerSettingsController extends Controller
     public function move_up($id)
     {
         // Check permission
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $setting = Voyager::model('Setting')->find($id);
 
         // Check permission
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $swapOrder = $setting->order;
         $previousSetting = Voyager::model('Setting')
@@ -176,7 +176,7 @@ class VoyagerSettingsController extends Controller
         $setting = Voyager::model('Setting')->find($id);
 
         // Check permission
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         if (isset($setting->id)) {
             // If the type is an image... Then delete it
@@ -200,12 +200,12 @@ class VoyagerSettingsController extends Controller
     public function move_down($id)
     {
         // Check permission
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $setting = Voyager::model('Setting')->find($id);
 
         // Check permission
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $swapOrder = $setting->order;
 

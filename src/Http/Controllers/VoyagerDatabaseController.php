@@ -23,7 +23,7 @@ class VoyagerDatabaseController extends Controller
 {
     public function index()
     {
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $dataTypes = Voyager::model('DataType')->select('id', 'name', 'slug')->get()->keyBy('name')->toArray();
 
@@ -47,7 +47,7 @@ class VoyagerDatabaseController extends Controller
      */
     public function create()
     {
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $db = $this->prepareDbManager('create');
 
@@ -63,7 +63,7 @@ class VoyagerDatabaseController extends Controller
      */
     public function store(Request $request)
     {
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         try {
             $conn = 'database.connections.'.config('database.default');
@@ -119,7 +119,7 @@ class VoyagerDatabaseController extends Controller
      */
     public function edit($table)
     {
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         if (!SchemaManager::tableExists($table)) {
             return redirect()
@@ -141,7 +141,7 @@ class VoyagerDatabaseController extends Controller
      */
     public function update(Request $request)
     {
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $table = json_decode($request->table, true);
 
@@ -213,7 +213,7 @@ class VoyagerDatabaseController extends Controller
 
     public function reorder_column(Request $request)
     {
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         if ($request->ajax()) {
             $table = $request->table;
@@ -239,7 +239,7 @@ class VoyagerDatabaseController extends Controller
      */
     public function show($table)
     {
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $additional_attributes = [];
         $model_name = Voyager::model('DataType')->where('name', $table)->pluck('model_name')->first();
@@ -264,7 +264,7 @@ class VoyagerDatabaseController extends Controller
      */
     public function destroy($table)
     {
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         try {
             SchemaManager::dropTable($table);

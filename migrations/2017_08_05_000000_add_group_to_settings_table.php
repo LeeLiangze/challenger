@@ -13,7 +13,7 @@ class AddGroupToSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::table('crm_cms_settings', function (Blueprint $table) {
+        Schema::table('sys_cms_settings', function (Blueprint $table) {
             $table->string('group')->nullable()->after('order');
         });
     }
@@ -25,7 +25,7 @@ class AddGroupToSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::table('crm_cms_settings', function (Blueprint $table) {
+        Schema::table('sys_cms_settings', function (Blueprint $table) {
             $table->dropColumn('group');
         });
     }

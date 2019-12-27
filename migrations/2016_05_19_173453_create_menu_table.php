@@ -12,13 +12,13 @@ class CreateMenuTable extends Migration
      */
     public function up()
     {
-        Schema::create('crm_cms_menus', function (Blueprint $table) {
+        Schema::create('sys_cms_menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
             $table->timestamps();
         });
 
-        Schema::create('crm_cms_menu_items', function (Blueprint $table) {
+        Schema::create('sys_cms_menu_items', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('menu_id')->nullable();
             $table->string('title');
@@ -31,8 +31,8 @@ class CreateMenuTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('crm_cms_menu_items', function (Blueprint $table) {
-            $table->foreign('menu_id')->references('id')->on('crm_cms_menus')->onDelete('cascade');
+        Schema::table('sys_cms_menu_items', function (Blueprint $table) {
+            $table->foreign('menu_id')->references('id')->on('sys_cms_menus')->onDelete('cascade');
         });
     }
 
@@ -44,6 +44,6 @@ class CreateMenuTable extends Migration
     public function down()
     {
         Schema::drop('cmr_cms_menu_items');
-        Schema::drop('crm_cms_menus');
+        Schema::drop('sys_cms_menus');
     }
 }

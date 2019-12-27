@@ -4,7 +4,6 @@ namespace CHG\Voyager\Traits;
 
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use CHG\Voyager\Facades\Voyager;
-use CHG\Voyager\Models\Role;
 
 /**
  * @property  \Illuminate\Database\Eloquent\Collection  roles
@@ -24,7 +23,7 @@ trait VoyagerUser
      */
     public function roles()
     {
-        return $this->belongsToMany(Voyager::modelClass('Role'), 'crm_cms_user_roles');
+        return $this->belongsToMany(Voyager::modelClass('Role'), 'user_roles', 'user_id', 'role_id');
     }
 
     /**
@@ -118,7 +117,7 @@ trait VoyagerUser
     {
         $this->loadRolesRelations();
 
-        if (!$this->role->relationLoaded('permissions')) {
+        if ($this->role && !$this->role->relationLoaded('permissions')) {
             $this->role->load('permissions');
             $this->load('roles.permissions');
         }

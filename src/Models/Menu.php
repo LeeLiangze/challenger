@@ -12,7 +12,7 @@ use CHG\Voyager\Facades\Voyager;
  */
 class Menu extends Model
 {
-    protected $table = 'crm_cms_menus';
+    protected $table = 'sys_cms_menus';
 
     protected $guarded = [];
 

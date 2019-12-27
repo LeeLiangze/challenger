@@ -25,7 +25,7 @@ class VoyagerMediaController extends Controller
     public function index()
     {
         // Check permission
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         return Voyager::view('voyager::media.index');
     }
@@ -262,7 +262,7 @@ class VoyagerMediaController extends Controller
             $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
             // Check permission
-            Voyager::canOrFail();
+            Voyager::canOrFail('super');
 
             // Load model and find record
             $model = app($dataType->model_name);

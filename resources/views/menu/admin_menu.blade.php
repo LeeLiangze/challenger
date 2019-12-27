@@ -49,10 +49,22 @@
         else
         {
             $linkAttributes =  'href="' . url($href) .'"';
-
-            if(!\CHG\Voyager\Facades\Voyager::can()) {
-                continue;
+            if ($item->title == 'Promo Lists'){
+                if(!\CHG\Voyager\Facades\Voyager::can('promo')) {
+                    continue;
+                }
             }
+            elseif ($item->title == 'Dashboard'){
+                if(!\CHG\Voyager\Facades\Voyager::can()) {
+                    continue;
+                }
+            }
+            else {
+                if(!\CHG\Voyager\Facades\Voyager::can('super')) {
+                    continue;
+                }
+            }
+
         }
     @endphp
 

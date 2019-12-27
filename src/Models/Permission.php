@@ -10,13 +10,13 @@ class Permission extends Model
 {
     use HasRelationships;
 
-    protected $table = 'crm_cms_permissions';
+    protected $table = 'sys_cms_permissions';
 
     protected $guarded = [];
 
     public function roles()
     {
-        return $this->belongsToMany(Voyager::modelClass('Role'),'crm_cms_permission_role');
+        return $this->belongsToMany(Voyager::modelClass('Role'),'sys_cms_permission_role');
     }
 
     public static function generateFor($table_name)

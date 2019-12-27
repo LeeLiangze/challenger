@@ -15,7 +15,7 @@ class MenuItem extends Model
         'link' => 'translatorLink',
     ];
 
-    protected $table = 'crm_cms_menu_items';
+    protected $table = 'sys_cms_menu_items';
 
     protected $guarded = [];
 

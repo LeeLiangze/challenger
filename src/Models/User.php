@@ -13,7 +13,7 @@ class User extends Authenticatable
 
     protected $guard = 'admin';
 
-    protected $table = 'crm_cms_users';
+    protected $table = 'sys_cms_users';
 
 //    protected $primaryKey = 'usr_id';
 

@@ -178,7 +178,7 @@ class DataRowsTableSeeder extends Seeder
                     'column'      => 'id',
                     'key'         => 'id',
                     'label'       => 'display_name',
-                    'pivot_table' => 'crm_cms_user_roles',
+                    'pivot_table' => 'sys_cms_user_roles',
                     'pivot'       => '1',
                     'taggable'    => '0',
                 ],

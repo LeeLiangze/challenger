@@ -11,7 +11,7 @@ class VoyagerMenuController extends Controller
     {
         $menu = Voyager::model('Menu')->findOrFail($id);
 
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $isModelTranslatable = is_bread_translatable(Voyager::model('MenuItem'));
 
@@ -22,7 +22,7 @@ class VoyagerMenuController extends Controller
     {
         $item = Voyager::model('MenuItem')->findOrFail($id);
 
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $item->deleteAttributeTranslation('title');
 
@@ -40,7 +40,7 @@ class VoyagerMenuController extends Controller
     {
         $menu = Voyager::model('Menu');
 
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         $data = $this->prepareParameters(
             $request->all()
@@ -80,7 +80,7 @@ class VoyagerMenuController extends Controller
 
         $menuItem = Voyager::model('MenuItem')->findOrFail($id);
 
-        Voyager::canOrFail();
+        Voyager::canOrFail('super');
 
         if (is_bread_translatable($menuItem)) {
             $trans = $this->prepareMenuTranslations($data);

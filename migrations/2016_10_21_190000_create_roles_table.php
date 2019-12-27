@@ -13,7 +13,7 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('crm_cms_roles', function (Blueprint $table) {
+        Schema::create('sys_cms_roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('display_name');
@@ -28,6 +28,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('crm_cms_roles');
+        Schema::drop('sys_cms_roles');
     }
 }

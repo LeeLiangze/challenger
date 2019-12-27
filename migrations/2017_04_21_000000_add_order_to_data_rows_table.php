@@ -25,7 +25,7 @@ class AddOrderToDataRowsTable extends Migration
      */
     public function down()
     {
-        Schema::table('crm_cms_data_rows', function (Blueprint $table) {
+        Schema::table('sys_cms_data_rows', function (Blueprint $table) {
             $table->dropColumn('order');
         });
     }

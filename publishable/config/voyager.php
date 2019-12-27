@@ -96,7 +96,7 @@ return [
 
     'database' => [
         'tables' => [
-            'hidden' => ['crm_cms_data_rows', 'crm_cms_data_types', 'crm_cms_menu_items', 'crm_cms_permission_role', 'crm_cms_settings'],
+            'hidden' => ['sys_cms_data_rows', 'sys_cms_data_types', 'sys_cms_menu_items', 'sys_cms_permission_role', 'sys_cms_settings'],
         ],
     ],
 

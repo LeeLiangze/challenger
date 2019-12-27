@@ -13,7 +13,7 @@ class MakeSettingsValueNullable extends Migration
      */
     public function up()
     {
-        Schema::table('crm_cms_settings', function (Blueprint $table) {
+        Schema::table('sys_cms_settings', function (Blueprint $table) {
             $table->text('value')->nullable()->change();
         });
     }
@@ -25,7 +25,7 @@ class MakeSettingsValueNullable extends Migration
      */
     public function down()
     {
-        Schema::table('crm_cms_settings', function (Blueprint $table) {
+        Schema::table('sys_cms_settings', function (Blueprint $table) {
             $table->text('value')->nullable(false)->change();
         });
     }
