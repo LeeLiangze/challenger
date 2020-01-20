@@ -14,6 +14,8 @@ class Menu extends Model
 {
     protected $table = 'sys_cms_menus';
 
+    protected $connection = 'pgsql';
+
     protected $guarded = [];
 
     public function items()

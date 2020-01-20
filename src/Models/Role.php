@@ -12,6 +12,8 @@ class Role extends Model
 
     protected $table = 'sys_cms_roles';
 
+    protected $connection = 'pgsql';
+
     protected $guarded = [];
 
     public function users()

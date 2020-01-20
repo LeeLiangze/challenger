@@ -22,7 +22,7 @@ class VoyagerAdminMiddleware
         if (Session::get('id')) {
             $rights = Session::get('rights');
 
-            if (in_array("MIS_ADM", $rights) || in_array("SYS_ADM", $rights) || in_array("CASHIER_SUP", $rights)){
+            if (in_array("CSUSR", $rights) || in_array("CSSUP", $rights) || in_array("SALES_USR", $rights) || in_array("CSMGR", $rights) || in_array("SUPER", $rights)){
                 return $next($request);
             }
 

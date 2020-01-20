@@ -16,7 +16,7 @@ class EnumType extends Type
         // get allowed from $column instance???
         // learn more about this....
 
-        $pdo = DB::connection()->getPdo();
+        $pdo = DB::connection('pgsql')->getPdo();
 
         // trim the values
         $allowed = array_map(function ($value) use ($pdo) {

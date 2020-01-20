@@ -9,6 +9,8 @@ class DataRow extends Model
 {
     use Translatable;
 
+    protected $connection = 'pgsql';
+
     protected $table = 'sys_cms_data_rows';
 
     protected $guarded = [];

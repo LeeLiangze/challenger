@@ -49,13 +49,18 @@
         else
         {
             $linkAttributes =  'href="' . url($href) .'"';
-            if ($item->title == 'Promo Lists'){
-                if(!\CHG\Voyager\Facades\Voyager::can('promo')) {
+            if ($item->title == 'Member Lists'){
+                if(!(\CHG\Voyager\Facades\Voyager::can('member') || \CHG\Voyager\Facades\Voyager::can('member_view'))) {
                     continue;
                 }
             }
             elseif ($item->title == 'Dashboard'){
                 if(!\CHG\Voyager\Facades\Voyager::can()) {
+                    continue;
+                }
+            }
+            elseif ($item->title == 'Rebate Claim'){
+                if(!\CHG\Voyager\Facades\Voyager::can('rebate')) {
                     continue;
                 }
             }

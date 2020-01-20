@@ -12,6 +12,8 @@ class Permission extends Model
 
     protected $table = 'sys_cms_permissions';
 
+    protected $connection = 'pgsql';
+
     protected $guarded = [];
 
     public function roles()

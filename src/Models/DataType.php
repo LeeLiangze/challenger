@@ -12,6 +12,8 @@ class DataType extends Model
 {
     use Translatable;
 
+    protected $connection = 'pgsql';
+
     protected $translatable = ['display_name_singular', 'display_name_plural'];
 
     protected $table = 'sys_cms_data_types';

@@ -17,6 +17,8 @@ class MenuItem extends Model
 
     protected $table = 'sys_cms_menu_items';
 
+    protected $connection = 'pgsql';
+
     protected $guarded = [];
 
     protected $translatable = ['title'];

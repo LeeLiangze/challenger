@@ -10,7 +10,6 @@
         <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-add-new">
             <i class="voyager-plus"></i> <span>{{ __('voyager::generic.add_new') }}</span>
         </a>
-        @include('voyager::partials.bulk-delete')
         @if(isset($dataType->order_column) && isset($dataType->order_display_column))
             <a href="{{ route('voyager.'.$dataType->slug.'.order') }}" class="btn btn-primary btn-add-new">
                 <i class="voyager-list"></i> <span>{{ __('voyager::bread.order') }}</span>

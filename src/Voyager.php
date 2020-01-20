@@ -258,18 +258,30 @@ class Voyager
         require __DIR__.'/../routes/voyager.php';
     }
 
-    /** @deprecated */
     public function can($permission='')
     {
         $this->loadPermissions();
 
-        if ($permission == 'promo'){
-            if (in_array("MIS_ADM", $this->permissions) || in_array("SYS_ADM", $this->permissions) || in_array("SUPER", $this->permissions)) {
+        if ($permission == 'member'){
+            if (in_array("CSUSR", $this->permissions) || in_array("SALES_USR", $this->permissions) || in_array("CSSUP", $this->permissions) || in_array("CSMGR", $this->permissions) || in_array("CSMGR", $this->permissions)) {
                 return true;
             }
             return false;
-        } else if ($permission == 'sales') {
-            if (in_array("MIS_ADM", $this->permissions) || in_array("CASHIER_SUP", $this->permissions) || in_array("SUPER", $this->permissions)) {
+        }
+        else if ($permission == 'member_view') {
+            if (in_array("SALES_USR", $this->permissions)) {
+                return true;
+            }
+            return false;
+        }
+        else if ($permission == 'member_edit') {
+            if (in_array("CSUSR", $this->permissions) || in_array("CSSUP", $this->permissions) || in_array("CSMGR", $this->permissions) || in_array("CSMGR", $this->permissions)) {
+                return true;
+            }
+            return false;
+        }
+        else if ($permission == 'rebate') {
+            if (in_array("CSSUP", $this->permissions) || in_array("CSMGR", $this->permissions)) {
                 return true;
             }
             return false;
@@ -280,16 +292,13 @@ class Voyager
             return false;
         }
         else {
-            if (in_array("MIS_ADM", $this->permissions) || in_array("SYS_ADM", $this->permissions) || in_array("CASHIER_SUP", $this->permissions) || in_array("SUPER", $this->permissions)) {
+            if (in_array("CSUSR", $this->permissions) || in_array("CSSUP", $this->permissions) || in_array("CSMGR", $this->permissions) || in_array("SALES_USR", $this->permissions) || in_array("SUPER", $this->permissions)) {
                 return true;
             }
             return false;
         }
-
-        return true;
     }
 
-    /** @deprecated */
     public function canOrFail($permission='')
     {
         if (!$this->can($permission)) {
@@ -299,7 +308,6 @@ class Voyager
         return true;
     }
 
-    /** @deprecated */
     public function canOrAbort($permission='', $statusCode = 403)
     {
         if (!$this->can($permission)) {
@@ -380,7 +388,6 @@ class Voyager
         return in_array(Translatable::class, $traits);
     }
 
-    /** @deprecated */
     protected function loadPermissions()
     {
         if (!$this->permissionsLoaded) {
