@@ -263,28 +263,28 @@ class Voyager
     {
         $this->loadPermissions();
 
-        if ($permission == 'promo'){
-            if (in_array("MIS_ADM", $this->permissions) || in_array("SYS_ADM", $this->permissions) || in_array("SUPER", $this->permissions)) {
-                return true;
-            }
-            return false;
-        } else if ($permission == 'sales') {
-            if (in_array("MIS_ADM", $this->permissions) || in_array("CASHIER_SUP", $this->permissions) || in_array("SUPER", $this->permissions)) {
-                return true;
-            }
-            return false;
-        } else if ($permission == 'super') {
-            if (in_array("SUPER", $this->permissions)) {
-                return true;
-            }
-            return false;
-        }
-        else {
-            if (in_array("MIS_ADM", $this->permissions) || in_array("SYS_ADM", $this->permissions) || in_array("CASHIER_SUP", $this->permissions) || in_array("SUPER", $this->permissions)) {
-                return true;
-            }
-            return false;
-        }
+//        if ($permission == 'promo'){
+//            if (in_array("MIS_ADM", $this->permissions) || in_array("SYS_ADM", $this->permissions) || in_array("SUPER", $this->permissions)) {
+//                return true;
+//            }
+//            return false;
+//        } else if ($permission == 'sales') {
+//            if (in_array("MIS_ADM", $this->permissions) || in_array("CASHIER_SUP", $this->permissions) || in_array("SUPER", $this->permissions)) {
+//                return true;
+//            }
+//            return false;
+//        } else if ($permission == 'super') {
+//            if (in_array("SUPER", $this->permissions)) {
+//                return true;
+//            }
+//            return false;
+//        }
+//        else {
+//            if (in_array("MIS_ADM", $this->permissions) || in_array("SYS_ADM", $this->permissions) || in_array("CASHIER_SUP", $this->permissions) || in_array("SUPER", $this->permissions)) {
+//                return true;
+//            }
+//            return false;
+//        }
 
         return true;
     }
