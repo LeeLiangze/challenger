@@ -302,9 +302,9 @@ class Voyager
     /** @deprecated */
     public function canOrAbort($permission='', $statusCode = 403)
     {
-        if (!$this->can($permission)) {
-            return abort($statusCode);
-        }
+//         if (!$this->can($permission)) {
+//             return abort($statusCode);
+//         }
 
         return true;
     }
