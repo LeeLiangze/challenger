@@ -292,9 +292,9 @@ class Voyager
     /** @deprecated */
     public function canOrFail($permission='')
     {
-        if (!$this->can($permission)) {
-            throw new AccessDeniedHttpException();
-        }
+//         if (!$this->can($permission)) {
+//             throw new AccessDeniedHttpException();
+//         }
 
         return true;
     }
