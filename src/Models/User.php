@@ -15,7 +15,7 @@ class User extends Authenticatable
 
     protected $table = 'sys_cms_users';
 
-//    protected $primaryKey = 'usr_id';
+    protected $primaryKey = 'usr_id';
 
     protected $guarded = [];
 
