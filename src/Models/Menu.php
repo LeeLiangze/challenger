@@ -4,6 +4,7 @@ namespace CHG\Voyager\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use CHG\Voyager\Events\MenuDisplay;
 use CHG\Voyager\Facades\Voyager;
 

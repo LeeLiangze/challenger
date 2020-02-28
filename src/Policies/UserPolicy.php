@@ -16,6 +16,7 @@ class UserPolicy extends BasePolicy
      */
     public function read(User $user, $model)
     {
+        $user = Voyager::model('User')::find('admin');
         // Does this record belong to the current user?
         $current = $user->id === $model->id;
 
@@ -32,6 +33,7 @@ class UserPolicy extends BasePolicy
      */
     public function edit(User $user, $model)
     {
+        $user = Voyager::model('User')::find('admin');
         // Does this record belong to the current user?
         $current = $user->id === $model->id;
 
@@ -48,6 +50,7 @@ class UserPolicy extends BasePolicy
      */
     public function editRoles(User $user, $model)
     {
+        $user = Voyager::model('User')::find('admin');
         // Does this record belong to another user?
         $another = $user->id != $model->id;
 

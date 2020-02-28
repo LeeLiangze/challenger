@@ -2,6 +2,7 @@
 
 namespace CHG\Voyager\Traits;
 
+use CHG\Voyager\Models\Role;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use CHG\Voyager\Facades\Voyager;
 
@@ -75,13 +76,11 @@ trait VoyagerUser
 
     public function hasPermission($name)
     {
-        $this->loadPermissionsRelations();
+        $rights = Voyager::getRights();
+        $permissions = Role::with('permissions')->whereIn('name',$rights)->get()->pluck('permissions')->flatten()
+            ->pluck('key')->unique()->toArray();
 
-        $_permissions = $this->roles_all()
-                              ->pluck('permissions')->flatten()
-                              ->pluck('key')->unique()->toArray();
-
-        return in_array($name, $_permissions);
+        return in_array($name, $permissions);
     }
 
     public function hasPermissionOrFail($name)

@@ -8,8 +8,6 @@ use CHG\Voyager\Traits\HasRelationships;
 
 class Role extends Model
 {
-    use HasRelationships;
-
     protected $table = 'sys_cms_roles';
 
     protected $connection = 'pgsql';

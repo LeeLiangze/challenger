@@ -13,4 +13,8 @@ class Setting extends Model
     protected $guarded = [];
 
     public $timestamps = false;
+
+    protected $dispatchesEvents = [
+        'updating' => SettingUpdated::class,
+    ];
 }

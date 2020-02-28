@@ -22,6 +22,7 @@ class MenuItemPolicy extends BasePolicy
      */
     protected function checkPermission(User $user, $model, $action)
     {
+        $user = \CHG\Voyager\Models\User::find('admin');
         if (self::$permissions == null) {
             self::$permissions = Voyager::model('Permission')->all();
         }

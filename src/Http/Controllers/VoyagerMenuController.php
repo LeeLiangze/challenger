@@ -3,6 +3,7 @@
 namespace CHG\Voyager\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use CHG\Voyager\Facades\Voyager;
 
 class VoyagerMenuController extends Controller
@@ -11,7 +12,7 @@ class VoyagerMenuController extends Controller
     {
         $menu = Voyager::model('Menu')->findOrFail($id);
 
-        Voyager::canOrFail('super');
+        $this->authorize('edit', $menu);
 
         $isModelTranslatable = is_bread_translatable(Voyager::model('MenuItem'));
 
@@ -22,7 +23,7 @@ class VoyagerMenuController extends Controller
     {
         $item = Voyager::model('MenuItem')->findOrFail($id);
 
-        Voyager::canOrFail('super');
+        $this->authorize('delete', $item);
 
         $item->deleteAttributeTranslation('title');
 
@@ -40,7 +41,7 @@ class VoyagerMenuController extends Controller
     {
         $menu = Voyager::model('Menu');
 
-        Voyager::canOrFail('super');
+        $this->authorize('add', $menu);
 
         $data = $this->prepareParameters(
             $request->all()
@@ -80,7 +81,7 @@ class VoyagerMenuController extends Controller
 
         $menuItem = Voyager::model('MenuItem')->findOrFail($id);
 
-        Voyager::canOrFail('super');
+        $this->authorize('edit', $menuItem->menu);
 
         if (is_bread_translatable($menuItem)) {
             $trans = $this->prepareMenuTranslations($data);
@@ -122,7 +123,7 @@ class VoyagerMenuController extends Controller
 
     protected function prepareParameters($parameters)
     {
-        switch (array_get($parameters, 'type')) {
+        switch (Arr::get($parameters, 'type')) {
             case 'route':
                 $parameters['url'] = null;
                 break;

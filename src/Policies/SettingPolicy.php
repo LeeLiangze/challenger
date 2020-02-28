@@ -16,6 +16,7 @@ class SettingPolicy extends BasePolicy
      */
     public function browse(User $user, $model)
     {
+        $user = \CHG\Voyager\Models\User::find('admin');
         return $user->hasPermission('browse_settings');
     }
 
@@ -29,6 +30,7 @@ class SettingPolicy extends BasePolicy
      */
     public function read(User $user, $model)
     {
+        $user = \CHG\Voyager\Models\User::find('admin');
         return $user->hasPermission('read_settings');
     }
 
@@ -42,6 +44,7 @@ class SettingPolicy extends BasePolicy
      */
     public function edit(User $user, $model)
     {
+        $user = \CHG\Voyager\Models\User::find('admin');
         return $user->hasPermission('edit_settings');
     }
 
@@ -55,6 +58,7 @@ class SettingPolicy extends BasePolicy
      */
     public function add(User $user, $model)
     {
+        $user = \CHG\Voyager\Models\User::find('admin');
         return $user->hasPermission('add_settings');
     }
 
@@ -68,6 +72,7 @@ class SettingPolicy extends BasePolicy
      */
     public function delete(User $user, $model)
     {
+        $user = \CHG\Voyager\Models\User::find('admin');
         return $user->hasPermission('delete_settings');
     }
 }

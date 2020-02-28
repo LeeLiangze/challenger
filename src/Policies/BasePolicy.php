@@ -46,13 +46,13 @@ class BasePolicy
      */
     protected function checkPermission(User $user, $model, $action)
     {
-        $rights = Auth::user()->rights();
         if (!isset(self::$datatypes[get_class($model)])) {
             $dataType = Voyager::model('DataType');
             self::$datatypes[get_class($model)] = $dataType->where('model_name', get_class($model))->first();
         }
 
         $dataType = self::$datatypes[get_class($model)];
+//        dd($action.'_'.$dataType->name);
 
         return $user->hasPermission($action.'_'.$dataType->name);
     }

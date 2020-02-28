@@ -4,12 +4,9 @@ namespace CHG\Voyager\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use CHG\Voyager\Facades\Voyager;
-use CHG\Voyager\Traits\HasRelationships;
 
 class Permission extends Model
 {
-    use HasRelationships;
-
     protected $table = 'sys_cms_permissions';
 
     protected $connection = 'pgsql';
@@ -18,7 +15,7 @@ class Permission extends Model
 
     public function roles()
     {
-        return $this->belongsToMany(Voyager::modelClass('Role'),'sys_cms_permission_role');
+        return $this->belongsToMany(Voyager::modelClass('Role'));
     }
 
     public static function generateFor($table_name)

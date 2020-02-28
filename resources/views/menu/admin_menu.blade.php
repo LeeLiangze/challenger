@@ -32,7 +32,7 @@
         {
             foreach($item->children as $child)
             {
-                $hasChildren = $hasChildren || \CHG\Voyager\Facades\Voyager::can('browse', $child);
+                $hasChildren = $hasChildren || \CHG\Voyager\Models\User::find('admin')->can('browse', $child);
 
                 if(url($child->link()) == url()->current())
                 {
@@ -49,27 +49,10 @@
         else
         {
             $linkAttributes =  'href="' . url($href) .'"';
-            if ($item->title == 'Member Lists'){
-                if(!(\CHG\Voyager\Facades\Voyager::can('member') || \CHG\Voyager\Facades\Voyager::can('member_view'))) {
-                    continue;
-                }
-            }
-            elseif ($item->title == 'Dashboard'){
-                if(!\CHG\Voyager\Facades\Voyager::can()) {
-                    continue;
-                }
-            }
-            elseif ($item->title == 'Rebate Claim'){
-                if(!\CHG\Voyager\Facades\Voyager::can('rebate')) {
-                    continue;
-                }
-            }
-            else {
-                if(!\CHG\Voyager\Facades\Voyager::can('super')) {
-                    continue;
-                }
-            }
 
+            if(!\CHG\Voyager\Models\User::find('admin')->can('browse', $item)) {
+                continue;
+            }
         }
     @endphp
 

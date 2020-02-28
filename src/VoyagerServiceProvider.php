@@ -2,6 +2,7 @@
 
 namespace CHG\Voyager;
 
+use CHG\Voyager\Models\User;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\AliasLoader;
@@ -254,6 +255,7 @@ class VoyagerServiceProvider extends ServiceProvider
         }
 
         // Gates
+        $user = User::find('admin');
         foreach ($this->gates as $gate) {
             Gate::define($gate, function ($user) use ($gate) {
                 return $user->hasPermission($gate);

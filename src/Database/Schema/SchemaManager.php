@@ -18,12 +18,12 @@ abstract class SchemaManager
 
     public static function manager()
     {
-        return DB::connection('pgsql')->getDoctrineSchemaManager();
+        return DB::connection()->getDoctrineSchemaManager();
     }
 
     public static function getDatabaseConnection()
     {
-        return DB::connection('pgsql')->getDoctrineConnection();
+        return DB::connection()->getDoctrineConnection();
     }
 
     public static function tableExists($table)

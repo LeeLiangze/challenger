@@ -16,7 +16,7 @@ class SetType extends Type
         // we're going to store SET values in the comment since DBAL doesn't support
         $allowed = explode(',', trim($fieldDeclaration['comment']));
 
-        $pdo = DB::connection('pgsql')->getPdo();
+        $pdo = DB::connection()->getPdo();
 
         // trim the values
         $fieldDeclaration['allowed'] = array_map(function ($value) use ($pdo) {

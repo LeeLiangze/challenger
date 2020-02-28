@@ -8,8 +8,9 @@ use CHG\Voyager\Contracts\User as UserContract;
 use CHG\Voyager\Traits\HasRelationships;
 use CHG\Voyager\Traits\VoyagerUser;
 
-class User extends Authenticatable
+class User extends Authenticatable implements UserContract
 {
+    use VoyagerUser;
 
     protected $guard = 'admin';
 

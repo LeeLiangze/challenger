@@ -13,9 +13,15 @@ class VoyagerEventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'CHG\Voyager\Events\BreadAdded' => [
-            'CHG\Voyager\Listeners\AddBreadMenuItem',
-            'CHG\Voyager\Listeners\AddBreadPermission',
+        Events\BreadAdded::class => [
+            Listeners\AddBreadMenuItem::class,
+            Listeners\AddBreadPermission::class,
+        ],
+        Events\BreadDeleted::class => [
+            Listeners\DeleteBreadMenuItem::class,
+        ],
+        Events\SettingUpdated::class => [
+            Listeners\ClearCachedSettingValue::class,
         ],
     ];
 

@@ -40,7 +40,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('browse', app($dataType->model_name));
 
         $getter = $dataType->server_side ? 'paginate' : 'get';
 
@@ -72,7 +72,7 @@ class VoyagerBaseController extends Controller
             }
 
             // Use withTrashed() if model uses SoftDeletes and if toggle is selected
-            if ($model && in_array(SoftDeletes::class, class_uses($model)) && Voyager::canOrFail('super')) {
+            if ($model && in_array(SoftDeletes::class, class_uses($model))) {
                 $usesSoftDeletes = true;
 
                 if ($request->get('showSoftDeleted')) {
@@ -135,15 +135,6 @@ class VoyagerBaseController extends Controller
 
         // Define showCheckboxColumn
         $showCheckboxColumn = false;
-        if (Voyager::canOrFail('super')) {
-            $showCheckboxColumn = true;
-        } else {
-            foreach ($actions as $action) {
-                if (method_exists($action, 'massAction')) {
-                    $showCheckboxColumn = true;
-                }
-            }
-        }
 
         // Define orderColumn
         $orderColumn = [];
@@ -228,7 +219,7 @@ class VoyagerBaseController extends Controller
         $this->removeRelationshipField($dataType, 'read');
 
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('read', $dataTypeContent);
 
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
@@ -284,7 +275,7 @@ class VoyagerBaseController extends Controller
         $this->removeRelationshipField($dataType, 'edit');
 
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('edit', $dataTypeContent);
 
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
@@ -319,7 +310,7 @@ class VoyagerBaseController extends Controller
         }
 
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('edit', $data);
 
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->editRows, $dataType->name, $id)->validate();
@@ -327,11 +318,7 @@ class VoyagerBaseController extends Controller
 
         event(new BreadDataUpdated($dataType, $data));
 
-        if (Voyager::canOrFail('super')) {
-            $redirect = redirect()->route("voyager.{$dataType->slug}.index");
-        } else {
-            $redirect = redirect()->back();
-        }
+        $redirect = redirect()->route("voyager.{$dataType->slug}.index");
 
         return $redirect->with([
             'message'    => __('voyager::generic.successfully_updated')." {$dataType->getTranslatedAttribute('display_name_singular')}",
@@ -359,7 +346,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('add', app($dataType->model_name));
 
         $dataTypeContent = (strlen($dataType->model_name) != 0)
                             ? new $dataType->model_name()
@@ -398,7 +385,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('add', app($dataType->model_name));
 
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->addRows)->validate();
@@ -407,11 +394,7 @@ class VoyagerBaseController extends Controller
         event(new BreadDataAdded($dataType, $data));
 
         if (!$request->has('_tagging')) {
-            if (Voyager::canOrFail('super')) {
-                $redirect = redirect()->route("voyager.{$dataType->slug}.index");
-            } else {
-                $redirect = redirect()->back();
-            }
+            $redirect = redirect()->route("voyager.{$dataType->slug}.index");
 
             return $redirect->with([
                     'message'    => __('voyager::generic.successfully_added_new')." {$dataType->getTranslatedAttribute('display_name_singular')}",
@@ -441,7 +424,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('delete', app($dataType->model_name));
 
         // Init array of IDs
         $ids = [];
@@ -488,7 +471,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('delete', app($dataType->model_name));
 
         // Get record
         $model = call_user_func([$dataType->model_name, 'withTrashed']);
@@ -553,7 +536,7 @@ class VoyagerBaseController extends Controller
             }
 
             // Check permission
-            Voyager::canOrFail('super');
+            $this->authorize('edit', $data);
 
             if (@json_decode($multi)) {
                 // Check if valid json
@@ -742,7 +725,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('edit', app($dataType->model_name));
 
         if (!isset($dataType->order_column) || !isset($dataType->order_display_column)) {
             return redirect()
@@ -784,7 +767,7 @@ class VoyagerBaseController extends Controller
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('edit', app($dataType->model_name));
 
         $model = app($dataType->model_name);
 

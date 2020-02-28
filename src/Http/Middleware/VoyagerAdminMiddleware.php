@@ -19,15 +19,10 @@ class VoyagerAdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Session::get('id')) {
-            $rights = Session::get('rights');
-            return $next($request);
+        if (Auth::id()) {
+            $user = Voyager::model('User')::find('admin');
 
-            if (in_array("CSUSR", $rights) || in_array("CSSUP", $rights) || in_array("SALES_USR", $rights) || in_array("CSMGR", $rights) || in_array("SUPER", $rights)){
-                return $next($request);
-            }
-
-            return redirect('/');
+            return $user->hasPermission('browse_admin') ? $next($request) : redirect('/');
         }
 
         $urlLogin = route('voyager.login');

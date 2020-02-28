@@ -258,52 +258,30 @@ class Voyager
         require __DIR__.'/../routes/voyager.php';
     }
 
-    public function can($permission='')
+    /** @deprecated */
+    public function can($permission)
     {
         $this->loadPermissions();
-        return true;
 
-        if ($permission == 'member'){
-            if (in_array("CSUSR", $this->permissions) || in_array("SALES_USR", $this->permissions) || in_array("CSSUP", $this->permissions) || in_array("CSMGR", $this->permissions) || in_array("CSMGR", $this->permissions)) {
-                return true;
-            }
+        // Check if permission exist
+        $exist = $this->permissions->where('key', $permission)->first();
+
+        // Permission not found
+        if (!$exist) {
+            throw new \Exception('Permission does not exist', 400);
+        }
+
+        $user = $this->getUser();
+        if ($user == null || !$user->hasPermission($permission)) {
             return false;
         }
-        else if ($permission == 'member_view') {
-            if (in_array("SALES_USR", $this->permissions)) {
-                return true;
-            }
-            return false;
-        }
-        else if ($permission == 'member_edit') {
-            if (in_array("CSUSR", $this->permissions) || in_array("CSSUP", $this->permissions) || in_array("CSMGR", $this->permissions) || in_array("CSMGR", $this->permissions)) {
-                return true;
-            }
-            return false;
-        }
-        else if ($permission == 'rebate') {
-            if (in_array("CSSUP", $this->permissions) || in_array("CSMGR", $this->permissions)) {
-                return true;
-            }
-            return false;
-        } else if ($permission == 'super') {
-            if (in_array("SUPER", $this->permissions)) {
-                return true;
-            }
-            return false;
-        }
-        else {
-            if (in_array("CSUSR", $this->permissions) || in_array("CSSUP", $this->permissions) || in_array("CSMGR", $this->permissions) || in_array("SALES_USR", $this->permissions) || in_array("SUPER", $this->permissions)) {
-                return true;
-            }
-            return false;
-        }
+
+        return true;
     }
 
-    public function canOrFail($permission='')
+    /** @deprecated */
+    public function canOrFail($permission)
     {
-        return true;
-        
         if (!$this->can($permission)) {
             throw new AccessDeniedHttpException();
         }
@@ -311,7 +289,8 @@ class Voyager
         return true;
     }
 
-    public function canOrAbort($permission='', $statusCode = 403)
+    /** @deprecated */
+    public function canOrAbort($permission, $statusCode = 403)
     {
         if (!$this->can($permission)) {
             return abort($statusCode);
@@ -355,7 +334,7 @@ class Voyager
 
             // Loop through all the packages and get the version of voyager
             foreach ($file->packages as $package) {
-                if ($package->name == 'CHG/voyager') {
+                if ($package->name == 'chg/voyager') {
                     $this->version = $package->version;
                     break;
                 }
@@ -391,15 +370,13 @@ class Voyager
         return in_array(Translatable::class, $traits);
     }
 
+    /** @deprecated */
     protected function loadPermissions()
     {
         if (!$this->permissionsLoaded) {
             $this->permissionsLoaded = true;
 
-            $permissions = Session::get("rights");
-            foreach ($permissions as $permission) {
-                array_push($this->permissions, $permission);
-            }
+            $this->permissions = self::model('Permission')->all();
         }
     }
 
@@ -432,5 +409,10 @@ class Voyager
     public function getName()
     {
         return Session::get('name');
+    }
+
+    public function getRights()
+    {
+        return Session::get('rights');
     }
 }

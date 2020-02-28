@@ -4,8 +4,6 @@ namespace CHG\Voyager\Listeners;
 
 use CHG\Voyager\Events\BreadAdded;
 use CHG\Voyager\Facades\Voyager;
-use CHG\Voyager\Models\Menu;
-use CHG\Voyager\Models\MenuItem;
 
 class AddBreadMenuItem
 {
@@ -29,13 +27,11 @@ class AddBreadMenuItem
     public function handle(BreadAdded $bread)
     {
         if (config('voyager.bread.add_menu_item') && file_exists(base_path('routes/web.php'))) {
-            require base_path('routes/web.php');
+            $menu = Voyager::model('Menu')->where('name', config('voyager.bread.default_menu'))->firstOrFail();
 
-            $menu = Menu::where('name', config('voyager.bread.default_menu'))->firstOrFail();
-
-            $menuItem = MenuItem::firstOrNew([
+            $menuItem = Voyager::model('MenuItem')->firstOrNew([
                 'menu_id' => $menu->id,
-                'title'   => $bread->dataType->display_name_plural,
+                'title'   => $bread->dataType->getTranslatedAttribute('display_name_plural'),
                 'url'     => '',
                 'route'   => 'voyager.'.$bread->dataType->slug.'.index',
             ]);

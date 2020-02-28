@@ -5,9 +5,9 @@ namespace CHG\Voyager\Http\Controllers;
 use Artisan;
 use Exception;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
-use CHG\Voyager\Facades\Voyager;
 
 class VoyagerCompassController extends Controller
 {
@@ -21,7 +21,11 @@ class VoyagerCompassController extends Controller
     public function index(Request $request)
     {
         // Check permission
-        Voyager::canOrFail('super');
+        $this->authorize('browse_compass');
+        //Check if app is not local
+        if (!\App::environment('local') && !config('voyager.compass_in_production', false)) {
+            throw new AccessDeniedHttpException();
+        }
 
         $message = '';
         $active_tab = '';
@@ -44,7 +48,7 @@ class VoyagerCompassController extends Controller
             app('files')->delete(LogViewer::pathToLogFile(base64_decode($this->request->input('del'))));
 
             return $this->redirect($this->request->url().'?logs=true')->with([
-                'message'    => __('voyager::compass.commands.delete_success').' '.base64_decode($this->request->input('del')),
+                'message'    => __('voyager::compass.logs.delete_success').' '.base64_decode($this->request->input('del')),
                 'alert-type' => 'success',
                 ]);
         } elseif ($this->request->has('delall')) {
@@ -54,7 +58,7 @@ class VoyagerCompassController extends Controller
             }
 
             return $this->redirect($this->request->url().'?logs=true')->with([
-                'message'    => __('voyager::compass.commands.delete_all_success'),
+                'message'    => __('voyager::compass.logs.delete_all_success'),
                 'alert-type' => 'success',
                 ]);
         }
@@ -309,7 +313,7 @@ class LogViewer
                             'level_img'   => self::$levels_imgs[$level],
                             'date'        => $current[1],
                             'text'        => $current[3],
-                            'in_file'     => isset($current[4]) ? $current[4] : null,
+                            'in_file'     => $current[4] ?? null,
                             'stack'       => preg_replace("/^\n*/", '', $log_data[$i]),
                         ];
                     }
